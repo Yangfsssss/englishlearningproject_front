@@ -1,23 +1,25 @@
-import React, { useState } from 'react'
-import loginService from '../services/login'
+import React, { useState } from "react";
+import loginService from "../services/login";
+
+import Button from "../styledComponents/Button";
 
 const LoginForm = () => {
-  const [username, setUsername] = useState('')
+  const [username, setUsername] = useState("");
 
-  const handleUsernameChange = (e) => setUsername(e.target.value)
+  const handleUsernameChange = e => setUsername(e.target.value);
 
   const handleLogin = async () => {
-    await loginService.login(username)
-  }
+    await loginService.login(username);
+  };
 
   return (
     <div>
       <form onSubmit={handleLogin}>
         <input type="text" value={username} onChange={handleUsernameChange} />
-        <button type="submit">Login</button>
+        <Button type="submit">Login</Button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default LoginForm
+export default LoginForm;
