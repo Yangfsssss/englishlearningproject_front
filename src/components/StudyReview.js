@@ -6,7 +6,11 @@ const StudyReview = ({ sections }) => {
   return (
     <div>
       {sections.map(section => (
-        <Section url={section.url} words={section.words} />
+        <Section
+          title={section.title}
+          url={section.url}
+          words={section.words}
+        />
       ))}
     </div>
   );

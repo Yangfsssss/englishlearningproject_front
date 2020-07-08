@@ -22,9 +22,9 @@ const App = () => {
   return (
     <>
       {/* <div style={darkMode} /> */}
-      <Button position="absolute" left="80%" top="10%">
+      {/* <Button position="absolute" left="80%" top="10%">
         Dark Mode
-      </Button>
+      </Button> */}
       <GlobalStyle />
       {/* <LoginForm /> */}
       <Home />

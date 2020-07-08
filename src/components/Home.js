@@ -15,10 +15,14 @@ const Home = () => {
   // }, [])
   // console.log(sections)
   const mainDiv = {
+    width: "90%",
+    height: "80%",
     position: "absolute",
     left: "50%",
     top: "50%",
     transform: "translate(-50%,-50%)"
+    // backgroundColor: "#bfa",
+    // border: "1px solid "
   };
   const home = { display: showNewStudy || showStudyReview ? "none" : "" };
   const newStudy = { display: showNewStudy ? "" : "none" };
@@ -34,7 +38,13 @@ const Home = () => {
 
   return (
     <div style={mainDiv}>
-      <Button display={back} onClick={handleGoBack}>
+      <Button
+        position="absolute"
+        left="0"
+        top="0"
+        display={back}
+        onClick={handleGoBack}
+      >
         back
       </Button>
       <div style={home}>
@@ -42,6 +52,10 @@ const Home = () => {
           width="8em"
           height="4em"
           margin="0 3em 0"
+          position="absolute"
+          left="40%"
+          top="50%"
+          transform="translate(-50%,-50%)"
           onClick={handleShowNewStudy}
         >
           New Study
@@ -50,6 +64,10 @@ const Home = () => {
           width="8em"
           height="4em"
           margin="0 0 0 3em"
+          position="absolute"
+          left="60%"
+          top="50%"
+          transform="translate(-50%,-50%)"
           onClick={handleShowStudyReview}
         >
           Study Review
