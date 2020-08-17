@@ -1,16 +1,17 @@
-import React from 'react'
+import React from "react";
 
-const Section = ({ url, words }) => {
+const Section = ({ title, url, words }) => {
   return (
     <div>
-      <h1>{url}</h1>
+      <h1>{title}</h1>
+      <h2>{url}</h2>
       <ul>
-        {words.map((word) => (
+        {words.map(word => (
           <li>{word}</li>
         ))}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default Section
+export default Section;

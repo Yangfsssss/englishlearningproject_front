@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import styled from "styled-components";
 
 const Input = styled.input.attrs({
@@ -24,3 +25,21 @@ const Input = styled.input.attrs({
 `;
 
 export default Input;
+=======
+import styled from "styled-components";
+
+const Input = styled.input.attrs({
+  placeholder: "",
+  type: "text"
+})`
+  /* display: block; */
+  font-size: 3em;
+  width: ${props => props.width};
+  height: ${props => props.height};
+  line-height: ${props => props.height};
+  /* border: none; */
+  vertical-align: middle;
+`;
+
+export default Input;
+>>>>>>> f84a09d8a845db7561f7f79ad27ffef13ce2c76c

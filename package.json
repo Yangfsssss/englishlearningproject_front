@@ -13,10 +13,15 @@
     "react-redux": "7.2.1",
     "react-router-dom": "5.2.0",
     "react-scripts": "3.4.1",
+<<<<<<< HEAD
     "redux": "4.0.5",
     "redux-thunk": "2.3.0",
     "styled-components": "5.1.1",
     "typescript": "3.9.7"
+=======
+    "sha256": "^0.2.0",
+    "styled-components": "5.1.1"
+>>>>>>> f84a09d8a845db7561f7f79ad27ffef13ce2c76c
   },
   "scripts": {
     "start": "react-scripts start",
@@ -42,4 +47,8 @@
   "proxy": "http://localhost:3001",
   "keywords": [],
   "description": ""
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> f84a09d8a845db7561f7f79ad27ffef13ce2c76c
