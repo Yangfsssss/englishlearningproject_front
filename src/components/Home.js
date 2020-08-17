@@ -1,48 +1,117 @@
-import React, { useState, useEffect } from 'react'
-import network from '../services/network'
+import React from "react";
+import { Route, Link, useRouteMatch, useLocation } from "react-router-dom";
 
-import NewStudy from './NewStudy'
-import StudyReview from './StudyReview'
+import Div from "../styledComponents/Div";
+import Button from "../styledComponents/Button";
 
-const Home = () => {
-  const [showNewStudy, setshowNewStudy] = useState(false)
-  const [showStudyReview, setshowStudyReview] = useState(false)
-  const [sections, setSections] = useState([])
+import NewStudy from "./newstudy/NewStudy";
+import StudyReview from "./studyreview/StudyReview";
+import DailyLearningStuff from "./dailylearningstuff/DailyLearningStuff";
 
-  useEffect(() => {
-    network.getData().then((sections) => setSections(sections))
-  }, [])
-  console.log(sections)
+const Home = ({ sections, records }) => {
+  let { path, url } = useRouteMatch();
+  let location = useLocation();
 
-  const home = { display: showNewStudy || showStudyReview ? 'none' : '' }
-  const newStudy = { display: showNewStudy ? '' : 'none' }
-  const studyReview = { display: showStudyReview ? '' : 'none' }
-  const back = { display: showNewStudy || showStudyReview ? '' : 'none' }
-
-  const handleShowNewStudy = () => setshowNewStudy(true)
-  const handleShowStudyReview = () => setshowStudyReview(true)
-  const handleGoBack = () => {
-    setshowNewStudy(false)
-    setshowStudyReview(false)
+  let somewhere;
+  switch (location.pathname) {
+    case "/home":
+      somewhere = "/";
+      break;
+    case "/home/newstudy":
+    case "/home/studyreview":
+      somewhere = "/home";
+      break;
+    default:
+      somewhere = "/home/studyreview";
+      break;
   }
 
-  return (
-    <div>
-      <div style={back}>
-        <button onClick={handleGoBack}>back</button>
-      </div>
-      <div style={home}>
-        <button onClick={handleShowNewStudy}>New Study</button>
-        <button onClick={handleShowStudyReview}> Study Review</button>
-      </div>
-      <div style={newStudy}>
-        <NewStudy />
-      </div>
-      <div style={studyReview}>
-        <StudyReview sections={sections} />
-      </div>
-    </div>
-  )
-}
+  // const mainDiv = {
+  //   width: "90%",
+  //   height: "80%",
+  //   position: "absolute",
+  //   left: "50%",
+  //   top: "50%",
+  //   transform: "translate(-50%,-50%)"
+  // };
 
-export default Home
+  return (
+    <Div
+      width="90%"
+      height="80%"
+      position="absolute"
+      left="50%"
+      top="50%"
+      transform="translate(-50%,-50%)"
+    >
+      <Link to={somewhere}>
+        <Button position="absolute" left="0" top="0">
+          back
+        </Button>
+      </Link>
+
+      <Route exact path={path}>
+        {/* <Div
+          position="absolute"
+          left="50%"
+          top="50%"
+          transform="translate(-50%,-50%)"
+        > */}
+        <Link to={`${url}/newstudy`}>
+          <Button
+            width="8em"
+            height="4em"
+            margin="0 3em 0"
+            position="absolute"
+            left="40%"
+            top="50%"
+            transform="translate(-100%,-100%)"
+          >
+            New Study
+          </Button>
+        </Link>
+        <Link to={`${url}/studyreview`}>
+          <Button
+            width="8em"
+            height="4em"
+            margin="0 0 0 3em"
+            position="absolute"
+            left="40%"
+            top="50%"
+            // transform="translate(-50%,-50%)"
+          >
+            Study Review
+          </Button>
+        </Link>
+        <Link to={`${url}/dailylearningstuff`}>
+          <Button
+            width="8em"
+            height="4em"
+            margin="0 0 0 3em"
+            position="absolute"
+            left="65%"
+            top="50%"
+            // transform="translate(-50%,-50%)"
+          >
+            DailyLearningStuff
+          </Button>
+        </Link>
+        {/* </Div> */}
+      </Route>
+
+      <Route path={`${path}/newstudy`}>
+        <NewStudy />
+      </Route>
+
+      <Route path={`${path}/studyreview`}>
+        <StudyReview sections={sections} />
+      </Route>
+
+      <Route path={`${path}/dailylearningstuff`}>
+        <DailyLearningStuff records={records} />
+      </Route>
+    </Div>
+  );
+};
+
+export default Home;

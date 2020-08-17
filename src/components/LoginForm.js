@@ -1,23 +1,35 @@
-import React, { useState } from 'react'
-import loginService from '../services/login'
+import React, { useState } from "react";
+import { useHistory, Link } from "react-router-dom";
+
+import Div from "../styledComponents/Div";
+import Button from "../styledComponents/Button";
 
 const LoginForm = () => {
-  const [username, setUsername] = useState('')
+  const history = useHistory();
+  const [username, setUsername] = useState("");
 
-  const handleUsernameChange = (e) => setUsername(e.target.value)
+  const handleUsernameChange = e => setUsername(e.target.value);
 
   const handleLogin = async () => {
-    await loginService.login(username)
-  }
+    // await loginService.login(username);
+    history.push("/home");
+  };
 
   return (
-    <div>
+    <Div
+      position="absolute"
+      left="50%"
+      top="50%"
+      transform="translate(-50%,-50%)"
+    >
       <form onSubmit={handleLogin}>
         <input type="text" value={username} onChange={handleUsernameChange} />
-        <button type="submit">Login</button>
+        <Link to="/home">
+          <Button type="submit">Login</Button>
+        </Link>
       </form>
-    </div>
-  )
-}
+    </Div>
+  );
+};
 
-export default LoginForm
+export default LoginForm;
