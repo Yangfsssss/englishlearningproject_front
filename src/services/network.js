@@ -2,18 +2,30 @@ import axios from "axios";
 // import sha256 from 'sha256'
 // import md5 from 'md5'
 
+const baseUrl = "https://18wl1.sse.codesandbox.io/api";
+
 const getSections = async () => {
-  let res = await axios.get("/api/sections");
+  let res = await axios.get(`${baseUrl}/sections`);
+  return res.data;
+};
+
+const getRecords = async () => {
+  let res = await axios.get(`${baseUrl}/dailylearningstuff`);
   return res.data;
 };
 
 const saveWord = async (id, newSection) => {
-  const res = await axios.put(`/api/${id}`, newSection);
+  const res = await axios.put(`${baseUrl}/${id}`, newSection);
   return res.data;
 };
 
-const saveSection = async newSection => {
-  const res = await axios.post("/api/sections");
+const saveSection = async (newSection) => {
+  const res = await axios.post(`${baseUrl}/sections`);
+  return res.data;
+};
+
+const saveRecord = async (newRecord) => {
+  const res = await axios.post(`${baseUrl}/dailylearningstuff`);
   return res.data;
 };
 
@@ -59,4 +71,4 @@ const saveSection = async newSection => {
 //   return res
 // }
 
-export default { getSections, saveWord, saveSection };
+export default { getSections, getRecords, saveWord, saveSection, saveRecord };

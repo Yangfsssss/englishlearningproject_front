@@ -1,8 +1,7 @@
-<<<<<<< HEAD
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const Input = styled.input.attrs({
-  type: "text"
+  type: 'text',
 })`
   display: ${(props) => props.display};
   font-size: ${(props) => props.fontSize};
@@ -19,27 +18,10 @@ const Input = styled.input.attrs({
     border: ${(props) => props.focusBorder};
     outline: ${(props) => props.focusOutline};
   }
+
   &:focus::-webkit-input-placeholder {
-    color: transparent;
+    // color: transparent;
   }
-`;
+`
 
-export default Input;
-=======
-import styled from "styled-components";
-
-const Input = styled.input.attrs({
-  placeholder: "",
-  type: "text"
-})`
-  /* display: block; */
-  font-size: 3em;
-  width: ${props => props.width};
-  height: ${props => props.height};
-  line-height: ${props => props.height};
-  /* border: none; */
-  vertical-align: middle;
-`;
-
-export default Input;
->>>>>>> f84a09d8a845db7561f7f79ad27ffef13ce2c76c
+export default Input
