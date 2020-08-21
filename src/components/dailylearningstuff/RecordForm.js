@@ -27,7 +27,7 @@ const NewRecord = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    const date = getYearMonthDay();
+    let date = getYearMonthDay();
     const newRecord = {
       date,
       memo: memoInputEl.current.value,

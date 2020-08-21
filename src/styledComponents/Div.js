@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const Div = styled.div`
   display:${(props) => props.display};
@@ -6,6 +6,7 @@ const Div = styled.div`
   height: ${(props) => props.height};
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
+  background-color:${(props) => props.backgroundColor};
   border: ${(props) => props.border};
   border-right:${(props) => props.borderRight};
   border-radius:${(props) => props.borderRadius};
@@ -21,6 +22,6 @@ const Div = styled.div`
   }
 
   /* transform:translate(-50%,-50%); */
-`
+`;
 
-export default Div
+export default Div;

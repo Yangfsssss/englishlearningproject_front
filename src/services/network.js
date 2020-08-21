@@ -20,12 +20,12 @@ const saveWord = async (id, newSection) => {
 };
 
 const saveSection = async (newSection) => {
-  const res = await axios.post(`${baseUrl}/sections`);
+  const res = await axios.post(`${baseUrl}/sections`, newSection);
   return res.data;
 };
 
 const saveRecord = async (newRecord) => {
-  const res = await axios.post(`${baseUrl}/dailylearningstuff`);
+  const res = await axios.post(`${baseUrl}/dailylearningstuff`, newRecord);
   return res.data;
 };
 

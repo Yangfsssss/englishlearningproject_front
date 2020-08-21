@@ -1,39 +1,29 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import { initializeData } from './reducers/sectionReducer'
+import Home from "./components/Home";
+import LoginForm from "./components/LoginForm";
+import GlobalStyle from "./styledComponents/GlobalStyle";
 
-import Button from './styledComponents/Button'
-
-import Home from './components/Home'
-import LoginForm from './components/LoginForm'
-import GlobalStyle from './styledComponents/GlobalStyle'
-
-// import "./App.css";
-// import "antd/dist/antd.css";
+import { initializeRecords } from "./reducers/recordReducer";
+import { initializeSections } from "./reducers/sectionReducer";
 
 const App = () => {
-  // const [isDarkModeChosen, setIsDarkModeChosen] = useState(false);
+  const dispatch = useDispatch();
 
-  // const style = isDarkModeChosen
-  // ? { filter: "invert(1) hue-rotate(180deg)" }
-  // : null;
+  useEffect(() => {
+    dispatch(initializeRecords());
+    dispatch(initializeSections());
+  }, [dispatch]);
 
-  const dispatch = useDispatch()
-  const sections = useSelector((state) => state.sections)
-  const records = useSelector((state) => state.records)
-  console.log(sections, records)
-
-  // const switchDarkMode = () => setIsDarkModeChosen(!isDarkModeChosen);
-
-  // useEffect(() => {
-  //   dispatch(initializeData());
-  // }, [dispatch]);
+  const sections = useSelector((state) => state.sections);
+  const records = useSelector((state) => state.records);
+  console.log(sections);
+  console.log(records);
 
   return (
-    <div className="App" /*style={style}*/>
-      {/* <Button onClick={switchDarkMode}>Dark Mode</Button> */}
+    <div className="App">
       <GlobalStyle />
       <Router>
         <Route exact path="/">
@@ -44,7 +34,7 @@ const App = () => {
         </Route>
       </Router>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

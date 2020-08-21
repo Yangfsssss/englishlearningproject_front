@@ -1,6 +1,6 @@
 import network from "../services/network";
 
-export const initializeData = () => {
+export const initializeSections = () => {
   return async (dispatch) => {
     const res = await network.getSections();
     dispatch({
@@ -30,34 +30,34 @@ export const saveSection = (newSection) => {
   };
 };
 
-const fakeSections = [
-  {
-    title: "fakeTitle1",
-    url: "fakeUrl1",
-    wordUnits: [
-      {
-        word: "fakeWord1",
-        translation: "fakeWord1"
-      },
-      { word: "fakeWord11", translation: "fakeWord11" }
-    ],
-    id: 1
-  },
-  {
-    title: "fakeTitle2",
-    url: "fakeUrl2",
-    wordUnits: [
-      {
-        word: "fakeWord2",
-        translation: "fakeWord2"
-      },
-      { word: "fakeWord22", translation: "fakeWord22" }
-    ],
-    id: 2
-  }
-];
+// const fakeSections = [
+//   {
+//     title: "fakeTitle1",
+//     url: "fakeUrl1",
+//     wordUnits: [
+//       {
+//         word: "fakeWord1",
+//         translation: "fakeWord1"
+//       },
+//       { word: "fakeWord11", translation: "fakeWord11" }
+//     ],
+//     id: 1
+//   },
+//   {
+//     title: "fakeTitle2",
+//     url: "fakeUrl2",
+//     wordUnits: [
+//       {
+//         word: "fakeWord2",
+//         translation: "fakeWord2"
+//       },
+//       { word: "fakeWord22", translation: "fakeWord22" }
+//     ],
+//     id: 2
+//   }
+// ];
 
-const sectionReducer = (state = fakeSections, action) => {
+const sectionReducer = (state = [], action) => {
   switch (action.type) {
     case "INIT_DATA":
       return action.data;
