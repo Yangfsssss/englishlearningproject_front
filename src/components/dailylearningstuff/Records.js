@@ -17,11 +17,13 @@ const Record = ({ record }) => {
       <ul>
         {record.date}
         <hr />
-        <li>
-          <A textDecoration="none" target="blank" href={record.url}>
-            {record.memo}
-          </A>
-        </li>
+        {record.items.map((item) => (
+          <li>
+            <A textDecoration="none" target="blank" href={item.url}>
+              {item.memo}
+            </A>
+          </li>
+        ))}
       </ul>
     </Div>
   );

@@ -6,7 +6,7 @@ import Input from "../../styledComponents/Input";
 import Button from "../../styledComponents/Button";
 
 import { createNewRecord } from "../../reducers/recordReducer";
-import { getYearMonthDay } from "../../utils";
+import { getDate } from "../../utils";
 
 const NewRecord = () => {
   // const [memo, setMemo] = useState("");
@@ -27,11 +27,15 @@ const NewRecord = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    let date = getYearMonthDay();
+    let date = getDate();
     const newRecord = {
       date,
-      memo: memoInputEl.current.value,
-      url: urlInputEl.current.value
+      item: [
+        {
+          memo: memoInputEl.current.value,
+          url: urlInputEl.current.value
+        }
+      ]
     };
 
     // console.log(newRecord);
