@@ -8,7 +8,7 @@ import Button from "../../styledComponents/Button";
 import { createNewRecord } from "../../reducers/recordReducer";
 import { getDate } from "../../utils";
 
-const NewRecord = () => {
+const NewRecord: React.FC = () => {
   // const [memo, setMemo] = useState("");
   // const [url, setUrl] = useState("");
   // const [placeholder, setPlaceholder] = useState({ memo: "memo", url: "url" });
@@ -25,6 +25,8 @@ const NewRecord = () => {
   // const handleUrlChange = (e) => setUrl(e.target.value);
 
   const handleFormSubmit = (e) => {
+    console.log(e);
+
     e.preventDefault();
 
     let date = getDate();
