@@ -1,12 +1,17 @@
-import React, { useState, useRef, useReducer } from "react";
+import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
 
 import Div from "../../styledComponents/Div";
-import Input from "../../styledComponents/Input";
+import InputS from "../../styledComponents/Input";
 import Button from "../../styledComponents/Button";
+// import Textarea from "../../styledComponents/Textarea";
 
 import { createNewRecord } from "../../reducers/recordReducer";
 import { getDate } from "../../utils";
+
+// import { Input } from "antd";
+// import formStyle from "./RecordForm.css";
+// const { TextArea } = Input;
 
 const NewRecord: React.FC = () => {
   // const [memo, setMemo] = useState("");
@@ -25,8 +30,6 @@ const NewRecord: React.FC = () => {
   // const handleUrlChange = (e) => setUrl(e.target.value);
 
   const handleFormSubmit = (e) => {
-    console.log(e);
-
     e.preventDefault();
 
     let date = getDate();
@@ -75,27 +78,44 @@ const NewRecord: React.FC = () => {
           borderRadius="5px"
           backgroundColor="white"
         >
-          <Input
+          {/* <TextArea
+            // className={textarea}
+            bordered={false}
+            autoSize={{ minRows: 1, maxRows: 6 }}
+            placeholder="memo"
+            // display="block"
+            // width="300px"
+            // height="40px"
+            // fontSize="30px"
+            // padding="0 0 0 0"
+            // border="none"
+            // borderRadius="5px"
+            // focusOutline="none"
+          /> */}
+          <InputS
             ref={memoInputEl}
             placeholder="memo"
             display="block"
             width="300px"
             height="40px"
+            fontFamily="Consolas, 'Courier New', monospace"
             fontSize="30px"
             padding="0 0 0 0"
             border="none"
             borderRadius="5px"
             focusOutline="none"
+            overflow="wrap"
             // value={memo}
             // onChange={handleMemoChange}
           />
           <hr style={{ width: "95%", margin: "0 auto", textAlign: "center" }} />
-          <Input
+          <InputS
             ref={urlInputEl}
             placeholder="url"
             display="block"
             width="300px"
             height="40px"
+            fontFamily="Consolas, 'Courier New', monospace"
             fontSize="30px"
             border="none"
             borderRadius="5px"

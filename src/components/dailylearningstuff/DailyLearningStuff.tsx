@@ -1,13 +1,15 @@
 import React from "react";
-import { Link, Route, useRouteMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Button from "../../styledComponents/Button";
 
 import RecordForm from "./RecordForm";
 import RecordHistory from "./RecordHistory";
 
-const DailyLearningStuff = ({ records }) => {
-  const { path, url } = useRouteMatch();
+import { Record } from "../../types";
+
+const DailyLearningStuff: React.FC<{ records: Record[] }> = ({ records }) => {
+  // const { path, url } = useRouteMatch();
 
   return (
     <div>

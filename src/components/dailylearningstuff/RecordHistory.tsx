@@ -3,21 +3,13 @@ import React from "react";
 import Div from "../../styledComponents/Div";
 import A from "../../styledComponents/A";
 
-interface Item {
-  memo: string;
-  url: string;
-}
+import { Record, Item } from "../../types";
 
-interface Record {
-  date: string;
-  items: Item[];
-}
-
-const Record: React.FC<{ record: Record }> = ({ record }) => {
+const RecordUnit: React.FC<{ record: Record }> = ({ record }) => {
   return (
     <Div
       height="100%"
-      minWidth="120px"
+      minWidth="300px"
       padding="10px"
       boxSizing="content-box"
       borderRight="2px solid black"
@@ -28,6 +20,7 @@ const Record: React.FC<{ record: Record }> = ({ record }) => {
         {record.items.map((item: Item) => (
           <li>
             <A
+              margin="0 0 10px 0"
               textDecoration="none"
               target="blank"
               href={item.url}
@@ -42,17 +35,17 @@ const Record: React.FC<{ record: Record }> = ({ record }) => {
   );
 };
 
-const Records: React.FC<{ records: Array<Record> }> = ({ records }) => {
+const Records: React.FC<{ records: Record[] }> = ({ records }) => {
   return (
     <Div display="flex" height="100%" position="absolute">
       {records.map((record) => (
-        <Record record={record} />
+        <RecordUnit record={record} />
       ))}
     </Div>
   );
 };
 
-const RecordHistory: React.FC<{ records: Array<Record> }> = ({ records }) => {
+const RecordHistory: React.FC<{ records: Record[] }> = ({ records }) => {
   return (
     <Div
       position="absolute"
