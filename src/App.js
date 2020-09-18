@@ -19,7 +19,7 @@ const App = () => {
 
   const sections = useSelector((state) => state.sections);
   const records = useSelector((state) => state.records);
-  console.log(sections);
+  // console.log(sections);
   console.log(records);
 
   return (

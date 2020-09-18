@@ -6,4 +6,6 @@ export interface Item {
 export interface Record {
   date: string;
   items: Item[];
+  wasUpdated: boolean;
+  id: string;
 }

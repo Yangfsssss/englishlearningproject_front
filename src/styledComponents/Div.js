@@ -2,7 +2,9 @@ import styled from "styled-components";
 
 const Div = styled.div`
   display:${(props) => props.display};
+  justify-content:${(props) => props.justifyContent};
   width: ${(props) => props.width};
+  min-width: ${(props) => props.minWidth};
   height: ${(props) => props.height};
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
