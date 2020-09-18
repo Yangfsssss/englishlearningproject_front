@@ -1,15 +1,20 @@
 import React from "react";
 
 import Div from "../../styledComponents/Div";
-import A from "../../styledComponents/A";
+import { Li, A, Span, Img } from "../../styledComponents/Img";
 
 import { Record, Item } from "../../types";
 
 const RecordUnit: React.FC<{ record: Record }> = ({ record }) => {
+  const handleDeleteItem = (e) => {
+    console.log(e);
+  };
+
   return (
     <Div
+      position="relative"
       height="100%"
-      minWidth="300px"
+      minWidth="320px"
       padding="10px"
       boxSizing="content-box"
       borderRight="2px solid black"
@@ -17,18 +22,29 @@ const RecordUnit: React.FC<{ record: Record }> = ({ record }) => {
       <ul>
         {record.date}
         <hr />
-        {record.items.map((item: Item) => (
-          <li>
+        {record.items.map((item: Item, index) => (
+          <Li margin="10px 0">
             <A
-              margin="0 0 10px 0"
               textDecoration="none"
               target="blank"
               href={item.url}
               color="black"
             >
-              {item.memo}
+              {/* <Div display="flex" justifyContent="space-between"> */}
+              <Span>{item.memo}</Span>
             </A>
-          </li>
+            <Img
+              onClick={handleDeleteItem}
+              src="https://codesandbox.io/api/v1/sandboxes/4ynhw/fs/src/components/dailylearningstuff/delete.svg"
+              alt="delete"
+              width="13px"
+              margin="0 0 0 auto"
+              // position="absolute"
+              // top="2px"
+              // right="13px"
+            />
+            {/* </Div> */}
+          </Li>
         ))}
       </ul>
     </Div>
