@@ -1,33 +1,38 @@
-import axios from "axios";
+import axios from 'axios'
 // import sha256 from 'sha256'
 // import md5 from 'md5'
 
-const baseUrl = "https://18wl1.sse.codesandbox.io/api";
+const baseUrl = 'http://localhost:3001/api'
 
 const getSections = async () => {
-  let res = await axios.get(`${baseUrl}/sections`);
-  return res.data;
-};
+  let res = await axios.get(`${baseUrl}/sections`)
+  return res.data
+}
 
 const getRecords = async () => {
-  let res = await axios.get(`${baseUrl}/dailylearningstuff`);
-  return res.data;
-};
+  let res = await axios.get(`${baseUrl}/dailylearningstuff`)
+  return res.data
+}
 
 const saveWord = async (id, newSection) => {
-  const res = await axios.put(`${baseUrl}/${id}`, newSection);
-  return res.data;
-};
+  const res = await axios.put(`${baseUrl}/${id}`, newSection)
+  return res.data
+}
 
 const saveSection = async (newSection) => {
-  const res = await axios.post(`${baseUrl}/sections`, newSection);
-  return res.data;
-};
+  const res = await axios.post(`${baseUrl}/sections`, newSection)
+  return res.data
+}
 
 const saveRecord = async (newRecord) => {
-  const res = await axios.post(`${baseUrl}/dailylearningstuff`, newRecord);
-  return res.data;
-};
+  const res = await axios.post(`${baseUrl}/dailylearningstuff`, newRecord)
+  return res.data
+}
+
+const deleteItem = async (id) => {
+  const res = await axios.delete(`${baseUrl}/dailylearningstuff/5f661d10ff9136005b900476`)
+  return res.data
+}
 
 // const translate = async (word) => {
 //   const appKey = '2ae98dad1ea5ce47'
@@ -71,4 +76,4 @@ const saveRecord = async (newRecord) => {
 //   return res
 // }
 
-export default { getSections, getRecords, saveWord, saveSection, saveRecord };
+export default { getSections, getRecords, saveWord, saveSection, saveRecord, deleteItem }
