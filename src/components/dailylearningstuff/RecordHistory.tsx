@@ -1,23 +1,24 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
+import React from "react";
+import { useDispatch } from "react-redux";
 
-import { deleteRecordItem } from '../../reducers/recordReducer'
+import { deleteRecordItem } from "../../reducers/recordReducer";
 
-import Div from '../../styledComponents/Div'
-import { Li, A, Span, Img } from '../../styledComponents/Img'
+import Div from "../../styledComponents/Div";
+import { Li, A, Span, Img } from "../../styledComponents/Img";
 
-import { Record, Item } from '../../types'
+import { Record, Item } from "../../types";
 
-const RecordUnitItemDetail: React.FC<{ item: Item; id: string }> = ({ item, id }) => {
-  const dispatch = useDispatch()
-
-  const recordUnitId = id
+const RecordUnitItemDetail: React.FC<{ item: Item; recordId: string }> = ({
+  item,
+  recordId
+}) => {
+  const dispatch = useDispatch();
 
   const handleDeleteItem = () => {
-    if (window.confirm('Are you sure you want to delete?')) {
-      dispatch(deleteRecordItem(recordUnitId, item._id))
+    if (window.confirm("Are you sure you want to delete?")) {
+      dispatch(deleteRecordItem(recordId, item._id));
     }
-  }
+  };
 
   return (
     <ul>
@@ -28,7 +29,7 @@ const RecordUnitItemDetail: React.FC<{ item: Item; id: string }> = ({ item, id }
         </A>
         <Img
           onClick={handleDeleteItem}
-          src="https://codesandbox.io/api/v1/sandboxes/4ynhw/fs/src/components/dailylearningstuff/delete.svg"
+          src="https://codesandbox.io/api/v1/sandboxes/4ynhw/fs/src/static/img/delete.svg"
           alt="delete"
           width="13px"
           margin="0 0 0 auto"
@@ -39,8 +40,8 @@ const RecordUnitItemDetail: React.FC<{ item: Item; id: string }> = ({ item, id }
         {/* </Div> */}
       </Li>
     </ul>
-  )
-}
+  );
+};
 
 const RecordUnit: React.FC<{ record: Record }> = ({ record }) => {
   return (
@@ -55,11 +56,11 @@ const RecordUnit: React.FC<{ record: Record }> = ({ record }) => {
       {record.date}
       <hr />
       {record.items.map((item: Item) => (
-        <RecordUnitItemDetail item={item} id={record.id} />
+        <RecordUnitItemDetail item={item} recordId={record.id} />
       ))}
     </Div>
-  )
-}
+  );
+};
 
 const Records: React.FC<{ records: Record[] }> = ({ records }) => {
   return (
@@ -68,15 +69,22 @@ const Records: React.FC<{ records: Record[] }> = ({ records }) => {
         <RecordUnit record={record} />
       ))}
     </Div>
-  )
-}
+  );
+};
 
 const RecordHistory: React.FC<{ records: Record[] }> = ({ records }) => {
   return (
-    <Div position="absolute" width="100%" height="40%" border="2px solid black" top="65%" overflow="auto">
+    <Div
+      position="absolute"
+      width="100%"
+      height="40%"
+      border="2px solid black"
+      top="65%"
+      overflow="auto"
+    >
       <Records records={records} />
     </Div>
-  )
-}
+  );
+};
 
-export default RecordHistory
+export default RecordHistory;

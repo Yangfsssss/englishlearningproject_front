@@ -32,7 +32,7 @@ const NewRecord: React.FC = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    let date = getDate();
+    let date = "11/11/11";
     const newRecord = {
       date,
       item: [
