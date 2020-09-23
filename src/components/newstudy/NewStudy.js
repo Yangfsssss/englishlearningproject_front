@@ -3,7 +3,8 @@ import { useDispatch } from "react-redux";
 // import network from "../services/network";
 
 // import addWord from '../../reducers/sectionReducer'
-import saveSection from "../../reducers/sectionReducer";
+import { saveSection } from "../../reducers/sectionReducer";
+import { getDate } from "../../utils";
 
 import Div from "../../styledComponents/Div";
 import Button from "../../styledComponents/Button";
@@ -25,12 +26,12 @@ const NewStudy = () => {
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleUrlChange = (e) => setUrl(e.target.value);
   const handleWordChange = (e) =>
-    setWordUnit({ ...wordUnit, word: e.target.value });
+    setWordUnit({ word: e.target.value, translation: "" });
 
   const saveTitle = (e) => {
     e.preventDefault();
 
-    if (title === "") {
+    if (title === "" && title.trim() === "") {
       alert("title cannot be empty");
     } else {
       setIsTitleSaved(true);
@@ -40,7 +41,7 @@ const NewStudy = () => {
   const saveUrl = (e) => {
     e.preventDefault();
 
-    if (url === "") {
+    if (url === "" && url.trim() === "") {
       alert("Url cannot be empty");
     } else {
       setIsUrlSaved(true);
@@ -50,26 +51,43 @@ const NewStudy = () => {
   const saveWord = async (e) => {
     e.preventDefault();
 
-    if (wordUnit.word === "") {
+    if (wordUnit.word === "" && wordUnit.word.trim() === "") {
       alert("word cannot be empty");
     } else {
-      // const res = await network.translate(wordUnit.word);
-      setWordUnit({ ...wordUnit /*translation: res.translation */ });
       setWordUnits(wordUnits.concat(wordUnit));
       setWordUnit({ word: "", translation: "" });
     }
   };
 
-  const handleSaveSection = (e) => {
+  const handleSaveSection = async (e) => {
     e.preventDefault();
+    console.log(wordUnits);
 
     if (window.confirm("finished this section and save?")) {
       const newSection = {
-        title,
-        url,
-        wordUnits
+        date: getDate(),
+        items: {
+          title: title.trim(),
+          url: url.trim(),
+          wordUnits: wordUnits.map((wordUnit) => ({
+            word: wordUnit.word.trim(),
+            translation: wordUnit.translation
+          }))
+        }
       };
-      dispatch(saveSection(newSection));
+
+      const res = await dispatch(saveSection(newSection));
+      if (res.status === 200) {
+        alert("Saved!");
+        setTitle("");
+        setUrl("");
+        setWordUnit("");
+        setWordUnits("");
+        setIsTitleSaved(false);
+        setIsUrlSaved(false);
+      } else {
+        alert("Save failed,please try again");
+      }
     }
   };
 
@@ -127,14 +145,18 @@ const NewStudy = () => {
           Add
         </Button>
       </Div>
-      <ul>
-        {wordUnits.map((wordUnit, index) => (
-          <li key={index}>
-            {wordUnit.word}
-            {wordUnit.translation}
-          </li>
-        ))}
-      </ul>
+      <Div position="absolute" left="10%" top="70%">
+        <ul>
+          {wordUnits.length === 0
+            ? null
+            : wordUnits.map((wordUnit, index) => (
+                <li key={index}>
+                  {wordUnit.word}
+                  {wordUnit.translation}
+                </li>
+              ))}
+        </ul>
+      </Div>
       <Button right="0" type="submit">
         Save
       </Button>

@@ -29,10 +29,11 @@ const NewRecord: React.FC = () => {
   // const handleMemoChange = (e) => setMemo(e.target.value);
   // const handleUrlChange = (e) => setUrl(e.target.value);
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
+    e.persist();
 
-    let date = "11/11/11";
+    let date = getDate();
     const newRecord = {
       date,
       item: [
@@ -48,9 +49,19 @@ const NewRecord: React.FC = () => {
     // setMemo(" ");
     // setUrl(" ");
     // setPlaceholder({ memo: "memo", url: "url" });
-    dispatch(createNewRecord(newRecord));
-    e.target.reset();
-    memoInputEl.current.focus();
+    const res = await dispatch(createNewRecord(newRecord));
+    console.log("+");
+    console.log(res);
+    console.log("-");
+
+    if (res.status === 200) {
+      alert("Saved!");
+      e.target.reset();
+      memoInputEl.current.focus();
+    } else {
+      alert("Save failed,please try again");
+    }
+
     // e.target.focus();
     // forceUpdate();
     // formEl.current.reset();

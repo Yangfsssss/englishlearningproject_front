@@ -14,9 +14,14 @@ const RecordUnitItemDetail: React.FC<{ item: Item; recordId: string }> = ({
 }) => {
   const dispatch = useDispatch();
 
-  const handleDeleteItem = () => {
+  const handleDeleteItem = async () => {
     if (window.confirm("Are you sure you want to delete?")) {
-      dispatch(deleteRecordItem(recordId, item._id));
+      const res = await dispatch(deleteRecordItem(recordId, item._id));
+      if (res.status === 200) {
+        alert("Deleted!");
+      } else {
+        alert("Delete failed,please try again");
+      }
     }
   };
 
