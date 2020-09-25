@@ -18,7 +18,10 @@ export const A = styled.a`
 `;
 
 export const Span = styled.span`
-  width: 300px;
+  width: ${(props) => props.width};
+  font-size: ${(props) => props.fontSize};
+  font-family: ${(props) => props.fontFamily};
+  cursor: ${(props) => props.cursor};
 `;
 
 export const Img = styled.img`

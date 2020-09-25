@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 // import network from "../services/network";
 
@@ -9,14 +9,17 @@ import { getDate } from "../../utils";
 import Div from "../../styledComponents/Div";
 import Button from "../../styledComponents/Button";
 import Input from "../../styledComponents/Input";
+import { Span } from "../../styledComponents/Img";
 
 const NewStudy = () => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
-  const [wordUnit, setWordUnit] = useState({ word: "", translation: "" });
+  const [rawWordUnit, setRawWordUnit] = useState("");
   const [wordUnits, setWordUnits] = useState([]);
   const [isUrlSaved, setIsUrlSaved] = useState(false);
   const [isTitleSaved, setIsTitleSaved] = useState(false);
+
+  const wordInputEl = useRef(null);
 
   const dispatch = useDispatch();
 
@@ -25,8 +28,7 @@ const NewStudy = () => {
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleUrlChange = (e) => setUrl(e.target.value);
-  const handleWordChange = (e) =>
-    setWordUnit({ word: e.target.value, translation: "" });
+  const handleWordChange = (e) => setRawWordUnit(e.target.value);
 
   const saveTitle = (e) => {
     e.preventDefault();
@@ -51,17 +53,25 @@ const NewStudy = () => {
   const saveWord = async (e) => {
     e.preventDefault();
 
-    if (wordUnit.word === "" && wordUnit.word.trim() === "") {
+    if (rawWordUnit === "" && rawWordUnit.trim() === "") {
       alert("word cannot be empty");
     } else {
+      let index = rawWordUnit.indexOf("@");
+
+      let wordUnit = {
+        word: rawWordUnit.substr(0, index),
+        translation: rawWordUnit.substr(index + 1)
+      };
+
       setWordUnits(wordUnits.concat(wordUnit));
-      setWordUnit({ word: "", translation: "" });
+      setRawWordUnit("");
+      console.log(wordInputEl.current);
+      wordInputEl.current.focus();
     }
   };
 
   const handleSaveSection = async (e) => {
     e.preventDefault();
-    console.log(wordUnits);
 
     if (window.confirm("finished this section and save?")) {
       const newSection = {
@@ -81,7 +91,7 @@ const NewStudy = () => {
         alert("Saved!");
         setTitle("");
         setUrl("");
-        setWordUnit("");
+        setRawWordUnit("");
         setWordUnits("");
         setIsTitleSaved(false);
         setIsUrlSaved(false);
@@ -93,11 +103,16 @@ const NewStudy = () => {
 
   const showTitleOrAddButton = () => {
     return isTitleSaved ? (
-      <h1> {title}</h1>
+      <Span fontSize="32px" fontFamily="Georgia">
+        {" "}
+        {title}
+      </Span>
     ) : (
       <Input
         width="21em"
         height="50px"
+        fontSize="32px"
+        fontFamily="Georgia"
         value={title}
         onChange={handleTitleChange}
       />
@@ -106,11 +121,16 @@ const NewStudy = () => {
 
   const showUrlOrAddButton = () => {
     return isUrlSaved ? (
-      <h1> {url}</h1>
+      <Span fontSize="32px" fontFamily="Georgia">
+        {" "}
+        {url}
+      </Span>
     ) : (
       <Input
         width="21em"
         height="50px"
+        fontSize="32px"
+        fontFamily="Georgia"
         value={url}
         onChange={handleUrlChange}
       />
@@ -120,25 +140,34 @@ const NewStudy = () => {
   return (
     <form onSubmit={handleSaveSection}>
       <Div position="absolute" left="10%" top="10%">
-        <h2>Title:</h2>
+        <Span fontSize="26px" fontFamily="Georgia">
+          Title:
+        </Span>
         {showTitleOrAddButton()}
         <Button height="35px" display={displayTitle} onClick={saveTitle}>
           Add
         </Button>
       </Div>
       <Div position="absolute" left="10%" top="30%">
-        <h2>URL:</h2>
+        <Span fontSize="26px" fontFamily="Georgia">
+          URL:
+        </Span>
         {showUrlOrAddButton()}
         <Button height="35px" display={displayUrl} onClick={saveUrl}>
           Add
         </Button>
       </Div>
       <Div position="absolute" left="10%" top="50%">
-        <h2>word:</h2>
+        <Span fontSize="26px" fontFamily="Georgia">
+          word:
+        </Span>
         <Input
-          width="8em"
+          ref={wordInputEl}
+          width="10em"
           height="50px"
-          value={wordUnit.word}
+          fontSize="32px"
+          fontFamily="Georgia"
+          value={rawWordUnit}
           onChange={handleWordChange}
         />
         <Button height="35px" onClick={saveWord}>
@@ -151,8 +180,13 @@ const NewStudy = () => {
             ? null
             : wordUnits.map((wordUnit, index) => (
                 <li key={index}>
-                  {wordUnit.word}
-                  {wordUnit.translation}
+                  <Span fontSize="21px" fontFamily="Georgia">
+                    {wordUnit.word}
+                  </Span>
+                  <Span fontSize="21px" fontFamily="Georgia">
+                    {" "}
+                    {wordUnit.translation}
+                  </Span>
                 </li>
               ))}
         </ul>

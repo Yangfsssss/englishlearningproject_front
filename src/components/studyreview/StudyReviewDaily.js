@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 
 import Div from "../../styledComponents/Div";
+import { Span } from "../../styledComponents/Img";
 // import {Section,SectionItem} from '../../types'
 
 const DailyDetail = ({ item, onClick }) => {
   return (
-    <Div width="100%" onClick={onClick}>
-      {item.title}
+    <Div width="100%">
+      <Span
+        fontSize="22px"
+        fontFamily="Georgia"
+        cursor="pointer"
+        onClick={onClick}
+      >
+        {item.title}
+      </Span>
     </Div>
   );
 };
@@ -17,8 +25,12 @@ const WordUnits = ({ wordUnits }) => {
       <ul>
         {wordUnits.map((wordUnit) => (
           <li>
-            {wordUnit.word}
-            {wordUnit.translation}
+            <Span fontSize="22px" fontFamily="Georgia">
+              {wordUnit.word}
+            </Span>
+            <Span fontSize="22px" fontFamily="Georgia">
+              {wordUnit.translation}
+            </Span>
           </li>
         ))}
       </ul>
@@ -46,8 +58,8 @@ const SectionDetail = ({ section }) => {
   };
 
   return (
-    <Div>
-      <p>{section.date}</p>
+    <Div margin="0 0 10px 0">
+      <Span>{section.date}</Span>
       <Div display="flex">
         <Div width="50%">
           {section.items.map((item) => (

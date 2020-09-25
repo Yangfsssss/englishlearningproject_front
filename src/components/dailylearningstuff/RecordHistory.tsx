@@ -30,7 +30,7 @@ const RecordUnitItemDetail: React.FC<{ item: Item; recordId: string }> = ({
       <Li margin="10px 0">
         <A textDecoration="none" target="blank" href={item.url} color="black">
           {/* <Div display="flex" justifyContent="space-between"> */}
-          <Span>{item.memo}</Span>
+          <Span width="300px">{item.memo}</Span>
         </A>
         <Img
           onClick={handleDeleteItem}
