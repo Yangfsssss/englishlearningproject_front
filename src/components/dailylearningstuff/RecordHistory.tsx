@@ -70,9 +70,7 @@ const RecordUnit: React.FC<{ record: Record }> = ({ record }) => {
 const Records: React.FC<{ records: Record[] }> = ({ records }) => {
   return (
     <Div display="flex" height="100%" position="absolute">
-      {records.map((record) => (
-        <RecordUnit record={record} />
-      ))}
+      {records.map((record) => <RecordUnit record={record} />).reverse()}
     </Div>
   );
 };

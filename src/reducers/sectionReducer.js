@@ -105,7 +105,6 @@ const sectionReducer = (state = [], action) => {
     //     section.id === action.data.id ? action.data : section
     //   );
     case "ADD_A_SECTION": {
-      console.log(action.data);
       return state.concat(action.data);
     }
     default:

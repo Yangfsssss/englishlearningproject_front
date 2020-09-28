@@ -13,8 +13,6 @@ export const initializeRecords = () => {
 export const createNewRecord = (newRecord) => {
   return async (dispatch) => {
     const res = await network.saveRecord(newRecord);
-    console.log(res);
-
     dispatch({
       type: "NEW_RECORD",
       data: res.data
@@ -26,7 +24,6 @@ export const createNewRecord = (newRecord) => {
 export const deleteRecordItem = (recordId, itemId) => {
   return async (dispatch) => {
     const res = await network.deleteItem(itemId);
-    console.log(res);
     dispatch({
       type: "DELETE",
       data: {
@@ -55,13 +52,11 @@ const recordReducer = (state = [], action) => {
       const updatedRecord = state.find(
         (record) => record.id === action.data.recordId
       );
-      console.log(updatedRecord);
 
       updatedRecord.items = updatedRecord.items.filter(
         (item) => item._id !== action.data.itemId
       );
 
-      console.log(state);
       return state.map((record) =>
         record.id === updatedRecord.id ? updatedRecord : record
       );

@@ -28,6 +28,7 @@ const WordUnits = ({ wordUnits }) => {
             <Span fontSize="22px" fontFamily="Georgia">
               {wordUnit.word}
             </Span>
+            {"  "}
             <Span fontSize="22px" fontFamily="Georgia">
               {wordUnit.translation}
             </Span>

@@ -50,9 +50,6 @@ const NewRecord: React.FC = () => {
     // setUrl(" ");
     // setPlaceholder({ memo: "memo", url: "url" });
     const res = await dispatch(createNewRecord(newRecord));
-    console.log("+");
-    console.log(res);
-    console.log("-");
 
     if (res.status === 200) {
       alert("Saved!");

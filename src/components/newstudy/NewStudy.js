@@ -65,8 +65,9 @@ const NewStudy = () => {
 
       setWordUnits(wordUnits.concat(wordUnit));
       setRawWordUnit("");
-      console.log(wordInputEl.current);
-      wordInputEl.current.focus();
+      if (wordInputEl && wordInputEl.current) {
+        wordInputEl.current.focus();
+      }
     }
   };
 
