@@ -1,6 +1,6 @@
 import React from "react";
 
-import Div from "../../styledComponents/Div";
+import { Div } from "../../styledComponents/General";
 
 import StudyReviewDaily from "./StudyReviewDaily";
 

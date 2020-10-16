@@ -5,8 +5,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./components/Home";
 import LoginForm from "./components/LoginForm";
 
-import GlobalStyle from "./styledComponents/GlobalStyle";
-import Div from "./styledComponents/Div";
+import { Div, GlobalStyle } from "./styledComponents/General";
 
 import { initializeRecords } from "./reducers/recordReducer";
 import { initializeSections } from "./reducers/sectionReducer";

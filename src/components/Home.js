@@ -1,29 +1,28 @@
-import React from 'react'
-import { Route, Link, useRouteMatch, useLocation } from 'react-router-dom'
+import React from "react";
+import { Route, Link, useRouteMatch, useLocation } from "react-router-dom";
 
-import Div from '../styledComponents/Div'
-import Button from '../styledComponents/Button'
+import { Div, StyledButton } from "../styledComponents/General";
 
-import NewStudy from './newstudy/NewStudy'
-import StudyReview from './studyreview/StudyReview'
-import DailyLearningStuff from './dailylearningstuff/DailyLearningStuff'
+import NewStudy from "./newstudy/NewStudy";
+import StudyReview from "./studyreview/index";
+import DailyLearningStuff from "./dailylearningstuff/index";
 
 const Home = ({ sections, records }) => {
-  let { path, url } = useRouteMatch()
-  let location = useLocation()
+  let { path, url } = useRouteMatch();
+  let location = useLocation();
 
-  let somewhere
+  let somewhere;
   switch (location.pathname) {
-    case '/home':
-      somewhere = '/'
-      break
-    case '/home/newstudy':
-    case '/home/studyreview':
-      somewhere = '/home'
-      break
+    case "/home":
+      somewhere = "/";
+      break;
+    case "/home/newstudy":
+    case "/home/studyreview":
+      somewhere = "/home";
+      break;
     default:
-      somewhere = '/home/studyreview'
-      break
+      somewhere = "/home/studyreview";
+      break;
   }
 
   // const mainDiv = {
@@ -45,9 +44,9 @@ const Home = ({ sections, records }) => {
       transform="translate(-50%,-50%)"
     >
       <Link to={somewhere}>
-        <Button position="absolute" left="0" top="0">
+        <StyledButton position="absolute" left="0" top="0">
           back
-        </Button>
+        </StyledButton>
       </Link>
 
       <Route exact path={path}>
@@ -58,7 +57,7 @@ const Home = ({ sections, records }) => {
           transform="translate(-50%,-50%)"
         > */}
         <Link to={`${url}/newstudy`}>
-          <Button
+          <StyledButton
             width="8em"
             height="4em"
             margin="0 3em 0"
@@ -68,10 +67,10 @@ const Home = ({ sections, records }) => {
             transform="translate(-100%,-100%)"
           >
             New Study
-          </Button>
+          </StyledButton>
         </Link>
         <Link to={`${url}/studyreview`}>
-          <Button
+          <StyledButton
             width="8em"
             height="4em"
             margin="0 0 0 3em"
@@ -81,10 +80,10 @@ const Home = ({ sections, records }) => {
             // transform="translate(-50%,-50%)"
           >
             Study Review
-          </Button>
+          </StyledButton>
         </Link>
         <Link to={`${url}/dailylearningstuff`}>
-          <Button
+          <StyledButton
             width="8em"
             height="4em"
             margin="0 0 0 3em"
@@ -94,7 +93,7 @@ const Home = ({ sections, records }) => {
             // transform="translate(-50%,-50%)"
           >
             DailyLearningStuff
-          </Button>
+          </StyledButton>
         </Link>
         {/* </Div> */}
       </Route>
@@ -111,7 +110,7 @@ const Home = ({ sections, records }) => {
         <DailyLearningStuff records={records} />
       </Route>
     </Div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

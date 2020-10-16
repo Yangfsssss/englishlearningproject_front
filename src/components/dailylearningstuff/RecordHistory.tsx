@@ -3,8 +3,13 @@ import { useDispatch } from "react-redux";
 
 import { deleteRecordItem } from "../../reducers/recordReducer";
 
-import Div from "../../styledComponents/Div";
-import { Li, A, Span, Img } from "../../styledComponents/Img";
+import { Div } from "../../styledComponents/General";
+import {
+  Li,
+  A,
+  Span,
+  Img
+} from "../../styledComponents/dailyLearningStuff/recordHistory";
 
 import { Record, Item } from "../../types";
 
@@ -27,22 +32,29 @@ const RecordUnitItemDetail: React.FC<{ item: Item; recordId: string }> = ({
 
   return (
     <ul>
-      <Li margin="10px 0">
-        <A textDecoration="none" target="blank" href={item.url} color="black">
-          {/* <Div display="flex" justifyContent="space-between"> */}
-          <Span width="300px">{item.memo}</Span>
+      <Li>
+        <A
+          textDecoration="none"
+          target="blank"
+          href={item.url}
+          color="black"
+          width="90%"
+        >
+          {item.memo}
         </A>
-        <Img
-          onClick={handleDeleteItem}
-          src="https://codesandbox.io/api/v1/sandboxes/4ynhw/fs/src/static/img/delete.svg"
-          alt="delete"
-          width="13px"
-          margin="0 0 0 auto"
-          // position="absolute"
-          // top="2px"
-          // right="13px"
-        />
-        {/* </Div> */}
+        <Div
+          display="inline-block"
+          height="32px"
+          width="32px"
+          position="relative"
+        >
+          <Img
+            onClick={handleDeleteItem}
+            src="https://codesandbox.io/api/v1/sandboxes/4ynhw/fs/src/static/img/delete.svg"
+            alt="delete"
+            width="13px"
+          />
+        </Div>
       </Li>
     </ul>
   );

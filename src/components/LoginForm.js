@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 
-import Div from "../styledComponents/Div";
-import Button from "../styledComponents/Button";
-import Input from "../styledComponents/Input";
+import { Div, StyledButton, Input } from "../styledComponents/General";
 
 const LoginForm = () => {
   // const history = useHistory()
@@ -33,9 +31,9 @@ const LoginForm = () => {
           onChange={handleUsernameChange}
         />
         <Link to="/home">
-          <Button type="submit" height="35px">
+          <StyledButton type="submit" height="35px">
             Login
-          </Button>
+          </StyledButton>
         </Link>
       </form>
     </Div>

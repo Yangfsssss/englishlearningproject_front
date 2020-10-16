@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+// import { useDispatch } from "react-redux";
 
-import Div from "../../styledComponents/Div";
-import { Span } from "../../styledComponents/Img";
-// import {Section,SectionItem} from '../../types'
+// import { deleteRecordItem } from "../../reducers/recordReducer";
+
+import { Div, Span } from "../../styledComponents/General";
 
 const DailyDetail = ({ item, onClick }) => {
   return (
@@ -20,6 +21,12 @@ const DailyDetail = ({ item, onClick }) => {
 };
 
 const WordUnits = ({ wordUnits }) => {
+  // const dispatch = useDispatch();
+
+  // const handleDeleteWordUnit = (e) => {
+  //   console.log(e);
+  // };
+
   return (
     <Div width="50%">
       <ul>

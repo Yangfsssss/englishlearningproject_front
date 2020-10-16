@@ -1,10 +1,11 @@
 import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
 
-import Div from "../../styledComponents/Div";
-import InputS from "../../styledComponents/Input";
-import Button from "../../styledComponents/Button";
-// import Textarea from "../../styledComponents/Textarea";
+import { StyledButton } from "../../styledComponents/General";
+import {
+  Div,
+  Input
+} from "../../styledComponents/dailyLearningStuff/recordForm";
 
 import { createNewRecord } from "../../reducers/recordReducer";
 import { getDate } from "../../utils";
@@ -100,7 +101,7 @@ const NewRecord: React.FC = () => {
             // borderRadius="5px"
             // focusOutline="none"
           /> */}
-          <InputS
+          <Input
             ref={memoInputEl}
             placeholder="memo"
             display="block"
@@ -117,7 +118,7 @@ const NewRecord: React.FC = () => {
             // onChange={handleMemoChange}
           />
           <hr style={{ width: "95%", margin: "0 auto", textAlign: "center" }} />
-          <InputS
+          <Input
             ref={urlInputEl}
             placeholder="url"
             display="block"
@@ -132,9 +133,9 @@ const NewRecord: React.FC = () => {
             // onChange={handleUrlChange}
           />
         </Div>
-        <Button type="submit" position="absolute" left="80%" top="0">
+        <StyledButton type="submit" position="absolute" left="80%" top="0">
           Save
-        </Button>
+        </StyledButton>
       </form>
     </>
   );

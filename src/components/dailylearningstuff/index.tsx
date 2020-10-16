@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import Button from "../../styledComponents/Button";
+import { StyledButton } from "../../styledComponents/General";
 
 import RecordForm from "./RecordForm";
 import RecordHistory from "./RecordHistory";
@@ -14,9 +14,9 @@ const DailyLearningStuff: React.FC<{ records: Record[] }> = ({ records }) => {
   return (
     <div>
       <Link to="/home">
-        <Button position="absolute" left="0" top="0">
+        <StyledButton position="absolute" left="0" top="0">
           back
-        </Button>
+        </StyledButton>
       </Link>
       {/* <Link to={`${path}/newrecord`}>
         <Button position="absolute" left="80%" top="0">
