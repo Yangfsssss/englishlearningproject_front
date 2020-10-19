@@ -3,13 +3,11 @@ import { useDispatch } from "react-redux";
 // import network from "../services/network";
 
 // import addWord from '../../reducers/sectionReducer'
-import { saveSection } from "../../reducers/sectionReducer";
+import { createNewSection } from "../../reducers/sectionReducer";
 import { getDate } from "../../utils";
 
-import Div from "../../styledComponents/Div";
-import Button from "../../styledComponents/Button";
-import Input from "../../styledComponents/Input";
-import { Span } from "../../styledComponents/Img";
+import { Div, StyledButton, Input } from "../../styledComponents/General";
+import { Li, Span, Img } from "../../styledComponents/newStudy/newStudy";
 
 const NewStudy = () => {
   const [title, setTitle] = useState("");
@@ -74,7 +72,7 @@ const NewStudy = () => {
   const handleSaveSection = async (e) => {
     e.preventDefault();
 
-    if (window.confirm("finished this section and save?")) {
+    if (window.confirm("finish this section and save?")) {
       const newSection = {
         date: getDate(),
         items: {
@@ -87,7 +85,7 @@ const NewStudy = () => {
         }
       };
 
-      const res = await dispatch(saveSection(newSection));
+      const res = await dispatch(createNewSection(newSection));
       if (res.status === 200) {
         alert("Saved!");
         setTitle("");
@@ -138,6 +136,11 @@ const NewStudy = () => {
     );
   };
 
+  const handleRemoveWord = (index) => {
+    const newWordUnits = wordUnits.filter((element, idx) => idx !== index);
+    setWordUnits(newWordUnits);
+  };
+
   return (
     <form onSubmit={handleSaveSection}>
       <Div position="absolute" left="10%" top="10%">
@@ -145,18 +148,18 @@ const NewStudy = () => {
           Title:
         </Span>
         {showTitleOrAddButton()}
-        <Button height="35px" display={displayTitle} onClick={saveTitle}>
+        <StyledButton height="35px" display={displayTitle} onClick={saveTitle}>
           Add
-        </Button>
+        </StyledButton>
       </Div>
       <Div position="absolute" left="10%" top="30%">
         <Span fontSize="26px" fontFamily="Georgia">
           URL:
         </Span>
         {showUrlOrAddButton()}
-        <Button height="35px" display={displayUrl} onClick={saveUrl}>
+        <StyledButton height="35px" display={displayUrl} onClick={saveUrl}>
           Add
-        </Button>
+        </StyledButton>
       </Div>
       <Div position="absolute" left="10%" top="50%">
         <Span fontSize="26px" fontFamily="Georgia">
@@ -171,30 +174,48 @@ const NewStudy = () => {
           value={rawWordUnit}
           onChange={handleWordChange}
         />
-        <Button height="35px" onClick={saveWord}>
+        <StyledButton height="35px" onClick={saveWord}>
           Add
-        </Button>
+        </StyledButton>
       </Div>
       <Div position="absolute" left="10%" top="70%">
         <ul>
           {wordUnits.length === 0
             ? null
             : wordUnits.map((wordUnit, index) => (
-                <li key={index}>
-                  <Span fontSize="21px" fontFamily="Georgia">
+                <Li key={index}>
+                  <Img
+                    onClick={() => handleRemoveWord(index)}
+                    src="https://codesandbox.io/api/v1/sandboxes/4ynhw/fs/src/static/img/delete.svg"
+                    alt="delete"
+                    display="inline-block"
+                    width="13px"
+                    margin="0 0 0 auto"
+                  />
+                  {"      "}
+                  <Span
+                    display="inline-block"
+                    width="140px"
+                    fontSize="21px"
+                    fontFamily="Georgia"
+                  >
                     {wordUnit.word}
                   </Span>
-                  <Span fontSize="21px" fontFamily="Georgia">
-                    {" "}
+                  <Span
+                    display="inline-block"
+                    fontSize="21px"
+                    fontFamily="Georgia"
+                  >
+                    {"  "}
                     {wordUnit.translation}
                   </Span>
-                </li>
+                </Li>
               ))}
         </ul>
       </Div>
-      <Button right="0" type="submit">
+      <StyledButton right="0" type="submit">
         Save
-      </Button>
+      </StyledButton>
     </form>
   );
 };

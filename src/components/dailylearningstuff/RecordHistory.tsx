@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 
 import { deleteRecordItem } from "../../reducers/recordReducer";
@@ -17,7 +17,15 @@ const RecordUnitItemDetail: React.FC<{ item: Item; recordId: string }> = ({
   item,
   recordId
 }) => {
+  const [divHeight, setDivHeight] = useState(null);
   const dispatch = useDispatch();
+
+  const aRef = useRef(null);
+  const divRef = useRef(null);
+
+  useEffect(() => {
+    setDivHeight(`${aRef.current.clientHeight}px`);
+  }, []);
 
   const handleDeleteItem = async () => {
     if (window.confirm("Are you sure you want to delete?")) {
@@ -31,20 +39,23 @@ const RecordUnitItemDetail: React.FC<{ item: Item; recordId: string }> = ({
   };
 
   return (
-    <ul>
-      <Li>
+    <Li>
+      <Div margin="5px 0" padding="auto 0">
         <A
+          ref={aRef}
+          padding="auto 0"
           textDecoration="none"
           target="blank"
           href={item.url}
           color="black"
           width="90%"
         >
-          {item.memo}
+          <Span>{item.memo}</Span>
         </A>
         <Div
+          ref={divRef}
+          height={divHeight}
           display="inline-block"
-          height="32px"
           width="32px"
           position="relative"
         >
@@ -55,8 +66,8 @@ const RecordUnitItemDetail: React.FC<{ item: Item; recordId: string }> = ({
             width="13px"
           />
         </Div>
-      </Li>
-    </ul>
+      </Div>
+    </Li>
   );
 };
 
@@ -72,9 +83,11 @@ const RecordUnit: React.FC<{ record: Record }> = ({ record }) => {
     >
       {record.date}
       <hr />
-      {record.items.map((item: Item) => (
-        <RecordUnitItemDetail item={item} recordId={record.id} />
-      ))}
+      <ul>
+        {record.items.map((item: Item) => (
+          <RecordUnitItemDetail item={item} recordId={record.id} />
+        ))}
+      </ul>
     </Div>
   );
 };

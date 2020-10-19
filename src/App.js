@@ -8,6 +8,7 @@ import LoginForm from "./components/LoginForm";
 import { Div, GlobalStyle } from "./styledComponents/General";
 
 import { initializeRecords } from "./reducers/recordReducer";
+import { initializeQAUnits } from "./reducers/QAUnitReducer";
 import { initializeSections } from "./reducers/sectionReducer";
 
 const App = () => {
@@ -15,11 +16,14 @@ const App = () => {
 
   useEffect(() => {
     dispatch(initializeRecords());
+    dispatch(initializeQAUnits());
     dispatch(initializeSections());
   }, [dispatch]);
 
   const sections = useSelector((state) => state.sections);
+  const QAUnits = useSelector((state) => state.QAUnits);
   const records = useSelector((state) => state.records);
+  console.log(QAUnits);
   console.log(sections);
   console.log(records);
 

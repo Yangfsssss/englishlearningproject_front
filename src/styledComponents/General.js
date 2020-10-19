@@ -58,6 +58,7 @@ export const Div = styled.div`
   min-width: ${(props) => props.minWidth};
   height: ${(props) => props.height};
   margin: ${(props) => props.margin};
+  margin-bottom: ${(props) => props.marginBottom};
   padding: ${(props) => props.padding};
   background-color: ${(props) => props.backgroundColor};
   border: ${(props) => props.border};
@@ -79,10 +80,12 @@ export const Input = styled.input.attrs({
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   line-height: ${(props) => props.height};
+  margin-right: ${(props) => props.marginRight};
   padding: ${(props) => props.padding};
   border: ${(props) => props.border};
   border-radius: ${(props) => props.borderRadius};
   vertical-align: ${(props) => props.verticalAlign};
+  overflow-wrap: break-word;
 `;
 
 export const StyledButton = styled.button`
@@ -111,14 +114,21 @@ export const StyledButton = styled.button`
 
 export const Textarea = styled.textarea`
   display: ${(props) => props.display};
-  font-size: ${(props) => props.fontSize};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
+  margin-right: ${(props) => props.marginRight};
+  rows:${(props) => props.rows};
+  cols:${(props) => props.cols};
+  font-size: ${(props) => props.fontSize};
+  font-family: ${(props) => props.fontFamily};
   line-height: ${(props) => props.height};
   padding: ${(props) => props.padding};
   border: ${(props) => props.border};
   border-radius: ${(props) => props.borderRadius};
   vertical-align: ${(props) => props.verticalAlign};
+  white-space: pre-wrap;
+  word-wrap:break-word;
+  word-break:break-all;
   resize: none;
 
   /* &:focus {
@@ -133,5 +143,16 @@ export const Span = styled.span`
   width: ${(props) => props.width};
   font-size: ${(props) => props.fontSize};
   font-family: ${(props) => props.fontFamily};
+  overflow-wrap: break-word;
   cursor: ${(props) => props.cursor};
+`;
+
+export const P = styled.p`
+  display: ${(props) => props.display};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  margin-bottom: ${(props) => props.marginBottom};
+  font-size: ${(props) => props.fontSize};
+  font-family: ${(props) => props.fontFamily};
+  overflow-wrap: break-word;
 `;

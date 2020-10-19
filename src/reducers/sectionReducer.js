@@ -20,11 +20,11 @@ export const initializeSections = () => {
 //   };
 // };
 
-export const saveSection = (newSection) => {
+export const createNewSection = (newSection) => {
   return async (dispatch) => {
     const res = await network.saveSection(newSection);
     dispatch({
-      type: "ADD_A_SECTION",
+      type: "NEW_SECTION",
       data: res.data
     });
     return res;
@@ -104,7 +104,7 @@ const sectionReducer = (state = [], action) => {
     //   return state.map((section) =>
     //     section.id === action.data.id ? action.data : section
     //   );
-    case "ADD_A_SECTION": {
+    case "NEW_SECTION": {
       return state.concat(action.data);
     }
     default:

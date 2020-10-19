@@ -4,6 +4,7 @@ import { Route, Link, useRouteMatch, useLocation } from "react-router-dom";
 import { Div, StyledButton } from "../styledComponents/General";
 
 import NewStudy from "./newstudy/NewStudy";
+import Basic from "./basic/Basic";
 import StudyReview from "./studyreview/index";
 import DailyLearningStuff from "./dailylearningstuff/index";
 
@@ -18,10 +19,11 @@ const Home = ({ sections, records }) => {
       break;
     case "/home/newstudy":
     case "/home/studyreview":
+    case "/home/basic":
       somewhere = "/home";
       break;
     default:
-      somewhere = "/home/studyreview";
+      somewhere = "/home";
       break;
   }
 
@@ -62,9 +64,9 @@ const Home = ({ sections, records }) => {
             height="4em"
             margin="0 3em 0"
             position="absolute"
-            left="40%"
-            top="50%"
-            transform="translate(-100%,-100%)"
+            left="15%"
+            top="25%"
+            // transform="translate(-100%,-100%)"
           >
             New Study
           </StyledButton>
@@ -75,9 +77,9 @@ const Home = ({ sections, records }) => {
             height="4em"
             margin="0 0 0 3em"
             position="absolute"
-            left="40%"
-            top="50%"
-            // transform="translate(-50%,-50%)"
+            left="15%"
+            top="25%"
+            transform="translate(105%,0)"
           >
             Study Review
           </StyledButton>
@@ -88,18 +90,35 @@ const Home = ({ sections, records }) => {
             height="4em"
             margin="0 0 0 3em"
             position="absolute"
-            left="65%"
-            top="50%"
-            // transform="translate(-50%,-50%)"
+            left="15%"
+            top="25%"
+            transform="translate(105%,105%)"
           >
             DailyLearningStuff
           </StyledButton>
         </Link>
         {/* </Div> */}
+        <Link to={`${url}/basic`}>
+          <StyledButton
+            width="8em"
+            height="4em"
+            margin="0 3em 0"
+            position="absolute"
+            left="15%"
+            top="25%"
+            transform="translate(0,105%)"
+          >
+            Basic
+          </StyledButton>
+        </Link>
       </Route>
 
       <Route path={`${path}/newstudy`}>
         <NewStudy />
+      </Route>
+
+      <Route path={`${path}/basic`}>
+        <Basic />
       </Route>
 
       <Route path={`${path}/studyreview`}>

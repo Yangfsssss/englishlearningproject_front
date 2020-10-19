@@ -14,6 +14,11 @@ const getRecords = async () => {
   return res.data;
 };
 
+const getQAUnits = async () => {
+  let res = await axios.get(`${baseUrl}/basic`);
+  return res.data;
+};
+
 // const saveWord = async (id, newSection) => {
 //   const res = await axios.put(`${baseUrl}/${id}`, newSection);
 //   return res.data;
@@ -26,6 +31,11 @@ const saveSection = async (newSection) => {
 
 const saveRecord = async (newRecord) => {
   const res = await axios.post(`${baseUrl}/dailylearningstuff`, newRecord);
+  return res;
+};
+
+const saveQAUnit = async (newQAUnit) => {
+  const res = await axios.post(`${baseUrl}/basic`, newQAUnit);
   return res;
 };
 
@@ -79,8 +89,10 @@ const deleteItem = async (id) => {
 export default {
   getSections,
   getRecords,
+  getQAUnits,
   // saveWord,
   saveSection,
   saveRecord,
+  saveQAUnit,
   deleteItem
 };
