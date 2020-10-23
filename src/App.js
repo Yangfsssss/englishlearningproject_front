@@ -16,7 +16,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(initializeRecords());
-    dispatch(initializeQAUnits());
+    // dispatch(initializeQAUnits());
     dispatch(initializeSections());
   }, [dispatch]);
 
@@ -35,7 +35,7 @@ const App = () => {
           <LoginForm />
         </Route>
         <Route path="/home">
-          <Home sections={sections} records={records} />
+          <Home sections={sections} records={records} QAUnits={QAUnits} />
         </Route>
       </Router>
     </Div>

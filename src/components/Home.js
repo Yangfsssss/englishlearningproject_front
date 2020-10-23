@@ -5,10 +5,10 @@ import { Div, StyledButton } from "../styledComponents/General";
 
 import NewStudy from "./newstudy/NewStudy";
 import Basic from "./basic/Basic";
-import StudyReview from "./studyreview/index";
+import StudyReview from "./studyReview/index";
 import DailyLearningStuff from "./dailylearningstuff/index";
 
-const Home = ({ sections, records }) => {
+const Home = ({ sections, QAUnits, records }) => {
   let { path, url } = useRouteMatch();
   let location = useLocation();
 
@@ -52,12 +52,6 @@ const Home = ({ sections, records }) => {
       </Link>
 
       <Route exact path={path}>
-        {/* <Div
-          position="absolute"
-          left="50%"
-          top="50%"
-          transform="translate(-50%,-50%)"
-        > */}
         <Link to={`${url}/newstudy`}>
           <StyledButton
             width="8em"
@@ -66,7 +60,6 @@ const Home = ({ sections, records }) => {
             position="absolute"
             left="15%"
             top="25%"
-            // transform="translate(-100%,-100%)"
           >
             New Study
           </StyledButton>
@@ -97,7 +90,6 @@ const Home = ({ sections, records }) => {
             DailyLearningStuff
           </StyledButton>
         </Link>
-        {/* </Div> */}
         <Link to={`${url}/basic`}>
           <StyledButton
             width="8em"
@@ -122,7 +114,7 @@ const Home = ({ sections, records }) => {
       </Route>
 
       <Route path={`${path}/studyreview`}>
-        <StudyReview sections={sections} />
+        <StudyReview sections={sections} QAUnits={QAUnits} />
       </Route>
 
       <Route path={`${path}/dailylearningstuff`}>
