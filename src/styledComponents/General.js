@@ -53,6 +53,7 @@ export const GlobalStyle = createGlobalStyle`
 
 export const Div = styled.div`
   display: ${(props) => props.display};
+  visibility: ${(props) => props.visibility};
   justify-content: ${(props) => props.justifyContent};
   width: ${(props) => props.width};
   min-width: ${(props) => props.minWidth};
@@ -141,6 +142,9 @@ export const Textarea = styled.textarea`
 export const Span = styled.span`
   display: ${(props) => props.display};
   width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
   font-size: ${(props) => props.fontSize};
   font-family: ${(props) => props.fontFamily};
   overflow-wrap: break-word;
@@ -155,4 +159,11 @@ export const P = styled.p`
   font-size: ${(props) => props.fontSize};
   font-family: ${(props) => props.fontFamily};
   overflow-wrap: break-word;
+`;
+
+export const Li = styled.li`
+  display: ${(props) => props.display};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  margin: ${(props) => props.margin};
 `;

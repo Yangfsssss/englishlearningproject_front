@@ -6,8 +6,8 @@ import { useDispatch } from "react-redux";
 import { createNewSection } from "../../reducers/sectionReducer";
 import { getDate } from "../../utils";
 
-import { Div, StyledButton, Input } from "../../styledComponents/General";
-import { Li, Span, Img } from "../../styledComponents/newStudy/newStudy";
+import { Div, StyledButton } from "../../styledComponents/General";
+import { Li, Span, Img, Input } from "../../styledComponents/newStudy/newStudy";
 
 const NewStudy = () => {
   const [title, setTitle] = useState("");
@@ -32,7 +32,7 @@ const NewStudy = () => {
     e.preventDefault();
 
     if (title === "" && title.trim() === "") {
-      alert("title cannot be empty");
+      alert("Title Cannot Be Empty");
     } else {
       setIsTitleSaved(true);
     }
@@ -42,7 +42,7 @@ const NewStudy = () => {
     e.preventDefault();
 
     if (url === "" && url.trim() === "") {
-      alert("Url cannot be empty");
+      alert("Url Cannot Be Empty");
     } else {
       setIsUrlSaved(true);
     }
@@ -52,7 +52,7 @@ const NewStudy = () => {
     e.preventDefault();
 
     if (rawWordUnit === "" && rawWordUnit.trim() === "") {
-      alert("word cannot be empty");
+      alert("Word Cannot Be Empty");
     } else {
       let index = rawWordUnit.indexOf("@");
 
@@ -72,7 +72,7 @@ const NewStudy = () => {
   const handleSaveSection = async (e) => {
     e.preventDefault();
 
-    if (window.confirm("finish this section and save?")) {
+    if (window.confirm("Finish This Section And Save?")) {
       const newSection = {
         date: getDate(),
         items: {
@@ -95,7 +95,7 @@ const NewStudy = () => {
         setIsTitleSaved(false);
         setIsUrlSaved(false);
       } else {
-        alert("Save failed,please try again");
+        alert("Save Failed,Please Try Again");
       }
     }
   };

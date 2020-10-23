@@ -2,7 +2,7 @@ import axios from "axios";
 // import sha256 from 'sha256'
 // import md5 from 'md5'
 
-const baseUrl = "https://18wl1.sse.codesandbox.io/api";
+const baseUrl = "https://rcchi.sse.codesandbox.io/api";
 
 const getSections = async () => {
   let res = await axios.get(`${baseUrl}/sections`);

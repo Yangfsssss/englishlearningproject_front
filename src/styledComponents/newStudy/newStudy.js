@@ -34,3 +34,23 @@ export const Img = styled.img`
     /* margin: 0 0 0 auto; */
   }
 `;
+
+export const Input = styled.input.attrs({
+  type: "text"
+})`
+  display: ${(props) => props.display};
+  font-size: ${(props) => props.fontSize};
+  /* font-family: ${(props) => props.fontFamily}; */
+  font-family: Georgia;
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  line-height: ${(props) => props.height};
+  margin-right:2px;
+  padding: ${(props) => props.padding};
+  /* border: ${(props) => props.border}; */
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: ${(props) => props.borderRadius};
+  vertical-align: ${(props) => props.verticalAlign};
+  border-radius: 0.2em;
+  overflow-wrap: break-word;
+`;
