@@ -7,8 +7,9 @@ import NewStudy from "./newstudy/NewStudy";
 import Basic from "./basic/Basic";
 import StudyReview from "./studyReview/index";
 import DailyLearningStuff from "./dailylearningstuff/index";
+import Indicator from "./Indicator";
 
-const Home = ({ sections, QAUnits, records }) => {
+const Home = ({ sections, QAUnits, records, dataStatus }) => {
   let { path, url } = useRouteMatch();
   let location = useLocation();
 
@@ -27,15 +28,6 @@ const Home = ({ sections, QAUnits, records }) => {
       break;
   }
 
-  // const mainDiv = {
-  //   width: "90%",
-  //   height: "80%",
-  //   position: "absolute",
-  //   left: "50%",
-  //   top: "50%",
-  //   transform: "translate(-50%,-50%)"
-  // };
-
   return (
     <Div
       width="90%"
@@ -50,6 +42,8 @@ const Home = ({ sections, QAUnits, records }) => {
           back
         </StyledButton>
       </Link>
+
+      <Indicator dataStatus={dataStatus} />
 
       <Route exact path={path}>
         <Link to={`${url}/newstudy`}>

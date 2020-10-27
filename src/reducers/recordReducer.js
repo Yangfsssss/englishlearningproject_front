@@ -3,6 +3,7 @@ import network from "../services/network";
 export const initializeRecords = () => {
   return async (dispatch) => {
     const res = await network.getRecords();
+    res.ready = true;
     dispatch({
       type: "INIT_RECORDS",
       data: res

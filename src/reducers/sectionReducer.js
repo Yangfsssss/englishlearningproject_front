@@ -3,6 +3,7 @@ import network from "../services/network";
 export const initializeSections = () => {
   return async (dispatch) => {
     const res = await network.getSections();
+    res.ready = true;
     dispatch({
       type: "INIT_DATA",
       data: res

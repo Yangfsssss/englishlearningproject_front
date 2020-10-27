@@ -6,17 +6,17 @@ const baseUrl = "https://rcchi.sse.codesandbox.io/api";
 
 const getSections = async () => {
   let res = await axios.get(`${baseUrl}/sections`);
-  return res.data;
+  return res;
 };
 
 const getRecords = async () => {
   let res = await axios.get(`${baseUrl}/dailylearningstuff`);
-  return res.data;
+  return res;
 };
 
 const getQAUnits = async () => {
   let res = await axios.get(`${baseUrl}/basic`);
-  return res.data;
+  return res;
 };
 
 // const saveWord = async (id, newSection) => {

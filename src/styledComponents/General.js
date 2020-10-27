@@ -70,6 +70,7 @@ export const Div = styled.div`
   top: ${(props) => props.top};
   transform: ${(props) => props.transform};
   overflow: ${(props) => props.overflow};
+  text-align: ${(props) => props.textAlign};
 `;
 
 export const Input = styled.input.attrs({
@@ -147,7 +148,9 @@ export const Span = styled.span`
   padding: ${(props) => props.padding};
   font-size: ${(props) => props.fontSize};
   font-family: ${(props) => props.fontFamily};
-  overflow-wrap: break-word;
+  /* overflow-wrap: break-word; */
+  vertical-align: ${(props) => props.verticalAlign};
+  line-height: ${(props) => props.lineHeight};
   cursor: ${(props) => props.cursor};
 `;
 
@@ -166,4 +169,15 @@ export const Li = styled.li`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   margin: ${(props) => props.margin};
+`;
+
+export const Img = styled.img`
+  display: ${(props) => props.display};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
+  border-radius: ${(props) => props.borderRadius};
+  background-color: ${(props) => props.backgroundColor};
+  vertical-align: ${(props) => props.verticalAlign};
 `;

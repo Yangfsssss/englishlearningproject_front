@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -12,6 +12,11 @@ import { initializeQAUnits } from "./reducers/QAUnitReducer";
 import { initializeSections } from "./reducers/sectionReducer";
 
 const App = () => {
+  // const [dataStatus, setDataStatus] = useState({
+  //   sections: false,
+  //   QAUnits: false,
+  //   records: false
+  // });
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,9 +25,27 @@ const App = () => {
     dispatch(initializeSections());
   }, [dispatch]);
 
-  const sections = useSelector((state) => state.sections);
-  const QAUnits = useSelector((state) => state.QAUnits);
-  const records = useSelector((state) => state.records);
+  const dataStatus = {
+    sections: useSelector((state) => state.sections.ready),
+    QAUnits: useSelector((state) => state.QAUnits.ready),
+    records: useSelector((state) => state.records.ready)
+  };
+  const sections = useSelector((state) => state.sections.data);
+  const QAUnits = useSelector((state) => state.QAUnits.data);
+  const records = useSelector((state) => state.records.data);
+
+  // if (sections.length !== 0) {
+  //   setDataStatus({ ...dataStatus, sections: true });
+  // }
+
+  // if (QAUnits.length !== 0) {
+  //   setDataStatus({ ...dataStatus, QAUnits: true });
+  // }
+
+  // if (records.length !== 0) {
+  //   setDataStatus({ ...dataStatus, records: true });
+  // }
+  console.log(dataStatus);
   console.log(QAUnits);
   console.log(sections);
   console.log(records);
@@ -35,7 +58,12 @@ const App = () => {
           <LoginForm />
         </Route>
         <Route path="/home">
-          <Home sections={sections} records={records} QAUnits={QAUnits} />
+          <Home
+            sections={sections}
+            records={records}
+            QAUnits={QAUnits}
+            dataStatus={dataStatus}
+          />
         </Route>
       </Router>
     </Div>
