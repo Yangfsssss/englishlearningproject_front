@@ -71,6 +71,7 @@ export const Div = styled.div`
   transform: ${(props) => props.transform};
   overflow: ${(props) => props.overflow};
   text-align: ${(props) => props.textAlign};
+  transition: margin 0.5s;
 `;
 
 export const Input = styled.input.attrs({

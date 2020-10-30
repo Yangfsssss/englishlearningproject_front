@@ -29,9 +29,6 @@ const StudyReview = ({ sections, QAUnits }) => {
   const [visibility, setVisibility] = useState({ English: true, QA: false });
 
   const switchReviewItem = (itemName) => {
-    console.log("switch");
-    console.log(itemName);
-
     switch (itemName) {
       case "English": {
         console.log("English");

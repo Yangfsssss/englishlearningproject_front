@@ -6,7 +6,7 @@ export const initializeQAUnits = () => {
     res.ready = true;
     dispatch({
       type: "INIT_QAUNITS",
-      data: res
+      payload: res
     });
   };
 };
@@ -60,9 +60,9 @@ const fakeQAUnits = {
 const QAUnitReducer = (state = fakeQAUnits, action) => {
   switch (action.type) {
     case "INIT_QAUNITS":
-      return action.data;
+      return action.payload;
     case "NEW_QAUNIT":
-      return state.concat(action.data);
+      return state.data.concat(action.data);
     default:
       return state;
   }

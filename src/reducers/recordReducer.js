@@ -6,7 +6,7 @@ export const initializeRecords = () => {
     res.ready = true;
     dispatch({
       type: "INIT_RECORDS",
-      data: res
+      payload: res
     });
   };
 };
@@ -39,18 +39,18 @@ export const deleteRecordItem = (recordId, itemId) => {
 const recordReducer = (state = [], action) => {
   switch (action.type) {
     case "INIT_RECORDS":
-      return action.data;
+      return action.payload;
     case "NEW_RECORD": {
       if (action.data.wasUpdated) {
-        return state.map((record) =>
+        return state.data.map((record) =>
           record.id === action.data.id ? action.data : record
         );
       } else {
-        return state.concat(action.data);
+        return state.data.concat(action.data);
       }
     }
     case "DELETE": {
-      const updatedRecord = state.find(
+      const updatedRecord = state.data.find(
         (record) => record.id === action.data.recordId
       );
 
@@ -58,7 +58,7 @@ const recordReducer = (state = [], action) => {
         (item) => item._id !== action.data.itemId
       );
 
-      return state.map((record) =>
+      return state.data.map((record) =>
         record.id === updatedRecord.id ? updatedRecord : record
       );
     }

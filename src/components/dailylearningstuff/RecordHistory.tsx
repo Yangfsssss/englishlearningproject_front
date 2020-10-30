@@ -93,11 +93,13 @@ const RecordUnit: React.FC<{ record: Record }> = ({ record }) => {
 };
 
 const Records: React.FC<{ records: Record[] }> = ({ records }) => {
-  return (
-    <Div display="flex" height="100%" position="absolute">
-      {records.map((record) => <RecordUnit record={record} />).reverse()}
-    </Div>
-  );
+  if (!records) return null;
+  else
+    return (
+      <Div display="flex" height="100%" position="absolute">
+        {records.map((record) => <RecordUnit record={record} />).reverse()}
+      </Div>
+    );
 };
 
 const RecordHistory: React.FC<{ records: Record[] }> = ({ records }) => {
