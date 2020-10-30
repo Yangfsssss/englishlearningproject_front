@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Home from "./components/Home";
-import LoginForm from "./components/LoginForm";
+import LoginForm from "./components/user/LoginForm";
 
 import { Div, GlobalStyle } from "./styledComponents/General";
 
@@ -12,11 +12,8 @@ import { initializeQAUnits } from "./reducers/QAUnitReducer";
 import { initializeSections } from "./reducers/sectionReducer";
 
 const App = () => {
-  // const [dataStatus, setDataStatus] = useState({
-  //   sections: false,
-  //   QAUnits: false,
-  //   records: false
-  // });
+  const [currentUser, setCurrentUser] = useState(null);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,31 +31,22 @@ const App = () => {
   const QAUnits = useSelector((state) => state.QAUnits.data);
   const records = useSelector((state) => state.records.data);
 
-  // if (sections.length !== 0) {
-  //   setDataStatus({ ...dataStatus, sections: true });
-  // }
-
-  // if (QAUnits.length !== 0) {
-  //   setDataStatus({ ...dataStatus, QAUnits: true });
-  // }
-
-  // if (records.length !== 0) {
-  //   setDataStatus({ ...dataStatus, records: true });
-  // }
-  console.log(dataStatus);
-  console.log(QAUnits);
+  // console.log(QAUnits);
+  console.log("app init");
   console.log(sections);
-  console.log(records);
+  console.log("app init");
+  // console.log(records);
 
   return (
-    <Div className="App" border="1px soild black">
+    <Div className="App">
       <GlobalStyle />
       <Router>
         <Route exact path="/">
-          <LoginForm />
+          <LoginForm setCurrentUser={setCurrentUser} />
         </Route>
         <Route path="/home">
           <Home
+            currentUser={currentUser}
             sections={sections}
             records={records}
             QAUnits={QAUnits}

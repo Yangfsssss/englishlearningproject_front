@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Link, useRouteMatch, useLocation } from "react-router-dom";
 
-import { Div, StyledButton } from "../styledComponents/General";
+import { Div, StyledButton, Span } from "../styledComponents/General";
 
 import NewStudy from "./newstudy/NewStudy";
 import Basic from "./basic/Basic";
@@ -9,7 +9,9 @@ import StudyReview from "./studyReview/index";
 import DailyLearningStuff from "./dailylearningstuff/index";
 import Indicator from "./Indicator";
 
-const Home = ({ sections, QAUnits, records, dataStatus }) => {
+const Home = ({ currentUser, sections, QAUnits, records, dataStatus }) => {
+  console.log(sections);
+
   let { path, url } = useRouteMatch();
   let location = useLocation();
 
@@ -42,6 +44,12 @@ const Home = ({ sections, QAUnits, records, dataStatus }) => {
           back
         </StyledButton>
       </Link>
+
+      <Div position="absolute" left="50%">
+        <Span fontSize="18px" fontFamily="Georgia">
+          {currentUser}
+        </Span>
+      </Div>
 
       <Indicator dataStatus={dataStatus} />
 
