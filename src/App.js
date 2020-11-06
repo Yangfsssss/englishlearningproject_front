@@ -18,24 +18,21 @@ const App = () => {
 
   useEffect(() => {
     dispatch(initializeRecords());
-    // dispatch(initializeQAUnits());
+    dispatch(initializeQAUnits());
     dispatch(initializeSections());
   }, [dispatch]);
 
-  const dataStatus = {
-    sections: useSelector((state) => state.sections.ready),
-    QAUnits: useSelector((state) => state.QAUnits.ready),
-    records: useSelector((state) => state.records.ready)
-  };
-  const sections = useSelector((state) => state.sections.data);
-  const QAUnits = useSelector((state) => state.QAUnits.data);
-  const records = useSelector((state) => state.records.data);
+  const state = useSelector((state) => state);
 
-  // console.log(QAUnits);
-  console.log("app init");
-  console.log(sections);
-  console.log("app init");
-  // console.log(records);
+  const sections = state.sections.data;
+  const QAUnits = state.QAUnits.data;
+  const records = state.records.data;
+
+  const dataStatus = {
+    sections: state.sections.ready,
+    QAUnits: state.QAUnits.ready,
+    records: state.records.ready
+  };
 
   return (
     <Div className="App">

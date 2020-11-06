@@ -7,12 +7,10 @@ import DisplayScreen from "./DisplayScreen";
 
 const EnglishReview = ({ sections, visibility }) => {
   const [choseItem, setChoseItem] = useState(null);
-
-  console.log("++++++++++++");
-  console.log(sections);
-  console.log("---------------------");
-
   if (!sections) return null;
+  // console.log("++++++++++++");
+  // console.log(sections);
+  // console.log("---------------------");
   else
     return (
       <Div

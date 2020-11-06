@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 // import network from "../services/network";
 
 // import addWord from '../../reducers/sectionReducer'
+import { createNewRecord } from "../../reducers/recordReducer";
 import { createNewSection } from "../../reducers/sectionReducer";
 import { getDate } from "../../utils";
 
@@ -16,6 +17,7 @@ const NewStudy = () => {
   const [wordUnits, setWordUnits] = useState([]);
   const [isUrlSaved, setIsUrlSaved] = useState(false);
   const [isTitleSaved, setIsTitleSaved] = useState(false);
+  const [isAddToRecord, setIsAddToRecord] = useState(false);
 
   const wordInputEl = useRef(null);
 
@@ -85,8 +87,31 @@ const NewStudy = () => {
         }
       };
 
-      const res = await dispatch(createNewSection(newSection));
-      if (res.status === 200) {
+      let recordRes = null;
+      let sectionRes = null;
+
+      if (isAddToRecord) {
+        const newRecord = {
+          date: getDate(),
+          item: [
+            {
+              memo: title.trim(),
+              url: url.trim()
+            }
+          ]
+        };
+        recordRes = dispatch(createNewRecord(newRecord));
+        sectionRes = dispatch(createNewSection(newSection));
+        recordRes = await recordRes;
+        sectionRes = await sectionRes;
+      } else {
+        sectionRes = await dispatch(createNewSection(newSection));
+      }
+
+      if (
+        (!recordRes && sectionRes.status === 200) ||
+        (recordRes.status === 200 && sectionRes.status === 200)
+      ) {
         alert("Saved!");
         setTitle("");
         setUrl("");
@@ -141,6 +166,10 @@ const NewStudy = () => {
     setWordUnits(newWordUnits);
   };
 
+  const handleRadioSelection = (e) => {
+    setIsAddToRecord(!isAddToRecord);
+  };
+
   return (
     <form onSubmit={handleSaveSection}>
       <Div position="absolute" left="10%" top="10%">
@@ -152,6 +181,7 @@ const NewStudy = () => {
           Add
         </StyledButton>
       </Div>
+
       <Div position="absolute" left="10%" top="30%">
         <Span fontSize="26px" fontFamily="Georgia">
           URL:
@@ -161,6 +191,7 @@ const NewStudy = () => {
           Add
         </StyledButton>
       </Div>
+
       <Div position="absolute" left="10%" top="50%">
         <Span fontSize="26px" fontFamily="Georgia">
           word:
@@ -178,6 +209,7 @@ const NewStudy = () => {
           Add
         </StyledButton>
       </Div>
+
       <Div position="absolute" left="10%" top="70%">
         <ul>
           {wordUnits.length === 0
@@ -213,9 +245,19 @@ const NewStudy = () => {
               ))}
         </ul>
       </Div>
+
       <StyledButton right="0" type="submit">
         Save
       </StyledButton>
+
+      <Div position="absolute" right="0" top="10%">
+        <input
+          type="checkbox"
+          value={isAddToRecord}
+          onChange={handleRadioSelection}
+        />
+        <Span>add to record</Span>
+      </Div>
     </form>
   );
 };

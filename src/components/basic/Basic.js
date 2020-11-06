@@ -44,7 +44,6 @@ const Basic = () => {
         question,
         answer
       };
-      console.log(newQAUnit);
 
       const res = await dispatch(createNewQAUnit(newQAUnit));
       if (res.status === 200) {

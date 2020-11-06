@@ -10,8 +10,6 @@ import DailyLearningStuff from "./dailylearningstuff/index";
 import Indicator from "./Indicator";
 
 const Home = ({ currentUser, sections, QAUnits, records, dataStatus }) => {
-  console.log(sections);
-
   let { path, url } = useRouteMatch();
   let location = useLocation();
 

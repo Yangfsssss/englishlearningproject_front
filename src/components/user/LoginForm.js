@@ -8,7 +8,7 @@ import { login, signUp } from "../../services/login";
 
 const LoginForm = ({ setCurrentUser }) => {
   const [username, setUsername] = useState("");
-  const [signInStyle, setSignInStyle] = useState(null);
+  const [signInStyle, setSignInStyle] = useState({ margin: "0" });
 
   const history = useHistory();
 

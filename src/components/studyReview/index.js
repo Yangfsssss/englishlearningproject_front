@@ -31,7 +31,6 @@ const StudyReview = ({ sections, QAUnits }) => {
   const switchReviewItem = (itemName) => {
     switch (itemName) {
       case "English": {
-        console.log("English");
         setVisibility({ English: true, QA: false });
         break;
       }

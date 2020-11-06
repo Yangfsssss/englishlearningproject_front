@@ -22,47 +22,49 @@ export const createNewQAUnit = (newQAUnit) => {
   };
 };
 
-const fakeQAUnits = {
-  data: [
-    {
-      type: "JavaScriptA",
-      date: "2020/10/22",
-      question: "fakeQuestion1",
-      answer: "fakeAnswer1"
-    },
-    {
-      type: "JavaScriptB",
-      date: "2020/10/22",
-      question: "fakeQuestion2",
-      answer: "fakeAnswer2"
-    },
-    {
-      type: "CssA",
-      date: "2020/10/22",
-      question: "fakeQuestion3",
-      answer: "fakeAnswer3"
-    },
-    {
-      type: "CssB",
-      date: "2020/10/22",
-      question: "fakeQuestion4",
-      answer: "fakeAnswer4"
-    },
-    {
-      type: "React",
-      date: "2020/10/22",
-      question: "fakeQuestion5",
-      answer: "fakeAnswer5"
-    }
-  ]
-};
+// const fakeQAUnits = {
+//   data: [
+//     {
+//       type: "JavaScriptA",
+//       date: "2020/10/22",
+//       question: "fakeQuestion1",
+//       answer: "fakeAnswer1"
+//     },
+//     {
+//       type: "JavaScriptB",
+//       date: "2020/10/22",
+//       question: "fakeQuestion2",
+//       answer: "fakeAnswer2"
+//     },
+//     {
+//       type: "CssA",
+//       date: "2020/10/22",
+//       question: "fakeQuestion3",
+//       answer: "fakeAnswer3"
+//     },
+//     {
+//       type: "CssB",
+//       date: "2020/10/22",
+//       question: "fakeQuestion4",
+//       answer: "fakeAnswer4"
+//     },
+//     {
+//       type: "React",
+//       date: "2020/10/22",
+//       question: "fakeQuestion5",
+//       answer: "fakeAnswer5"
+//     }
+//   ]
+// };
 
-const QAUnitReducer = (state = fakeQAUnits, action) => {
+const QAUnitReducer = (state = [], action) => {
   switch (action.type) {
     case "INIT_QAUNITS":
       return action.payload;
-    case "NEW_QAUNIT":
-      return state.data.concat(action.data);
+    case "NEW_QAUNIT": {
+      const data = state.data.concat(action.data);
+      return { ...state, data };
+    }
     default:
       return state;
   }

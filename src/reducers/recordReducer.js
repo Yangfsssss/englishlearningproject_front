@@ -42,11 +42,13 @@ const recordReducer = (state = [], action) => {
       return action.payload;
     case "NEW_RECORD": {
       if (action.data.wasUpdated) {
-        return state.data.map((record) =>
+        const data = state.data.map((record) =>
           record.id === action.data.id ? action.data : record
         );
+        return { ...state, data };
       } else {
-        return state.data.concat(action.data);
+        const data = state.data.concat(action.data);
+        return { ...state, data };
       }
     }
     case "DELETE": {
@@ -54,13 +56,21 @@ const recordReducer = (state = [], action) => {
         (record) => record.id === action.data.recordId
       );
 
-      updatedRecord.items = updatedRecord.items.filter(
-        (item) => item._id !== action.data.itemId
-      );
+      let data = null;
 
-      return state.data.map((record) =>
-        record.id === updatedRecord.id ? updatedRecord : record
-      );
+      if (updatedRecord.items.length === 1) {
+        data = state.data.filter((record) => record.id !== updatedRecord.id);
+      } else {
+        updatedRecord.items = updatedRecord.items.filter(
+          (item) => item._id !== action.data.itemId
+        );
+
+        data = state.data.map((record) =>
+          record.id === updatedRecord.id ? updatedRecord : record
+        );
+      }
+
+      return { ...state, data };
     }
     default:
       return state;
