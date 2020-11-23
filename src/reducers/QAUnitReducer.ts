@@ -1,22 +1,28 @@
 import network from "../services/network";
 
+import { QAUnit } from "../types";
+
+interface QAUnitAction {
+  type: string;
+  data: QAUnit[] | QAUnit;
+}
+
 export const initializeQAUnits = () => {
-  return async (dispatch) => {
-    const res = await network.getQAUnits();
-    res.ready = true;
+  return async (dispatch: (value: QAUnitAction) => void) => {
+    const { data: res } = await network.getQAUnits();
     dispatch({
       type: "INIT_QAUNITS",
-      payload: res
+      data: res
     });
   };
 };
 
-export const createNewQAUnit = (newQAUnit) => {
-  return async (dispatch) => {
-    const res = await network.saveQAUnit(newQAUnit);
+export const createNewQAUnit = (newQAUnit: QAUnit) => {
+  return async (dispatch: (value: QAUnitAction) => void) => {
+    const { data: res } = await network.saveQAUnit(newQAUnit);
     dispatch({
       type: "New_QAUNIT",
-      data: res.data
+      data: res
     });
     return res;
   };
@@ -57,13 +63,16 @@ export const createNewQAUnit = (newQAUnit) => {
 //   ]
 // };
 
-const QAUnitReducer = (state = [], action) => {
+const QAUnitReducer = (
+  state: QAUnit[] = [],
+  action: QAUnitAction
+): QAUnit[] => {
   switch (action.type) {
     case "INIT_QAUNITS":
-      return action.payload;
+      return action.data as QAUnit[];
     case "NEW_QAUNIT": {
-      const data = state.data.concat(action.data);
-      return { ...state, data };
+      const data = state.concat(action.data);
+      return data;
     }
     default:
       return state;

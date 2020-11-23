@@ -10,7 +10,9 @@ import { getDate } from "../../utils";
 import { Div, StyledButton } from "../../styledComponents/General";
 import { Li, Span, Img, Input } from "../../styledComponents/newStudy/newStudy";
 
-const NewStudy = () => {
+import { Section, Record } from "../../types";
+
+const NewStudy: React.FC = () => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [rawWordUnit, setRawWordUnit] = useState("");
@@ -77,15 +79,17 @@ const NewStudy = () => {
     if (window.confirm("Finish This Section And Save?")) {
       const newSection = {
         date: getDate(),
-        items: {
-          title: title.trim(),
-          url: url.trim(),
-          wordUnits: wordUnits.map((wordUnit) => ({
-            word: wordUnit.word.trim(),
-            translation: wordUnit.translation
-          }))
-        }
-      };
+        items: [
+          {
+            title: title.trim(),
+            url: url.trim(),
+            wordUnits: wordUnits.map((wordUnit) => ({
+              word: wordUnit.word.trim(),
+              translation: wordUnit.translation
+            }))
+          }
+        ]
+      } as Section;
 
       let recordRes = null;
       let sectionRes = null;
@@ -93,13 +97,14 @@ const NewStudy = () => {
       if (isAddToRecord) {
         const newRecord = {
           date: getDate(),
-          item: [
+          items: [
             {
               memo: title.trim(),
               url: url.trim()
             }
           ]
-        };
+        } as Record;
+
         recordRes = dispatch(createNewRecord(newRecord));
         sectionRes = dispatch(createNewSection(newSection));
         recordRes = await recordRes;
@@ -116,7 +121,7 @@ const NewStudy = () => {
         setTitle("");
         setUrl("");
         setRawWordUnit("");
-        setWordUnits("");
+        setWordUnits([]);
         setIsTitleSaved(false);
         setIsUrlSaved(false);
       } else {
@@ -161,7 +166,7 @@ const NewStudy = () => {
     );
   };
 
-  const handleRemoveWord = (index) => {
+  const handleRemoveWord = (index: number) => {
     const newWordUnits = wordUnits.filter((element, idx) => idx !== index);
     setWordUnits(newWordUnits);
   };

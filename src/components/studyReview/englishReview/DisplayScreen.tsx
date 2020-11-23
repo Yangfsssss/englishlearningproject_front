@@ -2,7 +2,9 @@ import React from "react";
 
 import { Li, Span } from "../../../styledComponents/General";
 
-const DisplayScreen = ({ choseItem }) => {
+import { SectionItem } from "../../../types";
+
+const DisplayScreen: React.FC<{ choseItem: SectionItem }> = ({ choseItem }) => {
   return (
     choseItem && (
       <ul>

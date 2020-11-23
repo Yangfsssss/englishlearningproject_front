@@ -9,7 +9,11 @@ import {
   StyledButton as StyledButtonI
 } from "../../styledComponents/studyReview/index";
 
-const Menu = ({ switchReviewItem }) => {
+import { Section, QAUnit } from "../../types";
+
+const Menu: React.FC<{ switchReviewItem: (value: string) => void }> = ({
+  switchReviewItem
+}) => {
   return (
     <DivI flexDirection="column" height="1000px">
       <StyledButtonI
@@ -25,10 +29,13 @@ const Menu = ({ switchReviewItem }) => {
   );
 };
 
-const StudyReview = ({ sections, QAUnits }) => {
+const StudyReview: React.FC<{ sections: Section[]; QAUnits: QAUnit[] }> = ({
+  sections,
+  QAUnits
+}) => {
   const [visibility, setVisibility] = useState({ English: true, QA: false });
 
-  const switchReviewItem = (itemName) => {
+  const switchReviewItem = (itemName: string): void => {
     switch (itemName) {
       case "English": {
         setVisibility({ English: true, QA: false });

@@ -2,20 +2,22 @@ import axios from "axios";
 // import sha256 from 'sha256'
 // import md5 from 'md5'
 
+import { Section, Record, QAUnit } from "../types";
+
 const baseUrl = "https://mjlrb.sse.codesandbox.io/api";
 
 const getSections = async () => {
-  let res = await axios.get(`${baseUrl}/sections`);
+  let res = await axios.get<Section[]>(`${baseUrl}/sections`);
   return res;
 };
 
 const getRecords = async () => {
-  let res = await axios.get(`${baseUrl}/dailylearningstuff`);
+  let res = await axios.get<Record[]>(`${baseUrl}/dailylearningstuff`);
   return res;
 };
 
 const getQAUnits = async () => {
-  let res = await axios.get(`${baseUrl}/basic`);
+  let res = await axios.get<QAUnit[]>(`${baseUrl}/basic`);
   return res;
 };
 
@@ -24,23 +26,26 @@ const getQAUnits = async () => {
 //   return res.data;
 // };
 
-const saveSection = async (newSection) => {
-  const res = await axios.post(`${baseUrl}/sections`, newSection);
+const saveSection = async (newSection: Section) => {
+  const res = await axios.post<Section>(`${baseUrl}/sections`, newSection);
   return res;
 };
 
-const saveRecord = async (newRecord) => {
-  const res = await axios.post(`${baseUrl}/dailylearningstuff`, newRecord);
+const saveRecord = async (newRecord: Record) => {
+  const res = await axios.post<Record>(
+    `${baseUrl}/dailylearningstuff`,
+    newRecord
+  );
   return res;
 };
 
-const saveQAUnit = async (newQAUnit) => {
-  const res = await axios.post(`${baseUrl}/basic`, newQAUnit);
+const saveQAUnit = async (newQAUnit: QAUnit) => {
+  const res = await axios.post<QAUnit>(`${baseUrl}/basic`, newQAUnit);
   return res;
 };
 
-const deleteItem = async (id) => {
-  const res = await axios.delete(`${baseUrl}/dailylearningstuff/${id}`);
+const deleteItem = async (id: string) => {
+  const res: string = await axios.delete(`${baseUrl}/dailylearningstuff/${id}`);
   return res;
 };
 

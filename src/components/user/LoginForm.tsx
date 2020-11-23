@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router";
 
 import { Div, Input, Span } from "../../styledComponents/General";

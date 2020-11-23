@@ -6,7 +6,12 @@ import React from "react";
 import { Div, Span } from "../../../styledComponents/General";
 import { Div as DivS } from "../../../styledComponents/studyReview/englishReview/StudyReviewDaily";
 
-const DailyDetail = ({ item, onClick }) => {
+import { Section, SectionItem } from "../../../types";
+
+const DailyDetail: React.FC<{ item: SectionItem; onClick: () => void }> = ({
+  item,
+  onClick
+}) => {
   return (
     <Div width="100%">
       <Span
@@ -22,8 +27,11 @@ const DailyDetail = ({ item, onClick }) => {
   );
 };
 
-const StudyReviewDaily = ({ section, setChoseItem }) => {
-  const handleShowWordUnits = (title) => {
+const StudyReviewDaily: React.FC<{
+  section: Section;
+  setChoseItem: (value: SectionItem) => void;
+}> = ({ section, setChoseItem }) => {
+  const handleShowWordUnits = (title: string): void => {
     const matchedItem = section.items.find((item) => item.title === title);
     setChoseItem(matchedItem);
   };

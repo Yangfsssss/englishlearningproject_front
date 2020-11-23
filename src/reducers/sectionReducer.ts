@@ -1,12 +1,18 @@
 import network from "../services/network";
 
+import { Section } from "../types";
+
+interface SectionAction {
+  type: string;
+  data: Section | Section[];
+}
+
 export const initializeSections = () => {
-  return async (dispatch) => {
-    const res = await network.getSections();
-    res.ready = true;
+  return async (dispatch: (value: SectionAction) => void) => {
+    const { data: res } = await network.getSections();
     dispatch({
       type: "INIT_DATA",
-      payload: res
+      data: res
     });
   };
 };
@@ -21,12 +27,12 @@ export const initializeSections = () => {
 //   };
 // };
 
-export const createNewSection = (newSection) => {
-  return async (dispatch) => {
-    const res = await network.saveSection(newSection);
+export const createNewSection = (newSection: Section) => {
+  return async (dispatch: (value: SectionAction) => void) => {
+    const { data: res } = await network.saveSection(newSection);
     dispatch({
       type: "NEW_SECTION",
-      data: res.data
+      data: res
     });
     return res;
   };
@@ -97,17 +103,17 @@ export const createNewSection = (newSection) => {
 //   }
 // ];
 
-const sectionReducer = (state = [], action) => {
+const sectionReducer = (state: Section[] = [], action: SectionAction) => {
   switch (action.type) {
     case "INIT_DATA":
-      return action.payload;
+      return action.data as Section[];
     // case "ADD_A_WORD":
     //   return state.map((section) =>
     //     section.id === action.data.id ? action.data : section
     //   );
     case "NEW_SECTION": {
-      const data = state.data.concat(action.data);
-      return { ...state, data };
+      const data = state.concat(action.data);
+      return data;
     }
     default:
       return state;

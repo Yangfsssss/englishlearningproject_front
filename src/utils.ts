@@ -1,5 +1,5 @@
 //获取当前日期
-export const getDate = () => {
+export const getDate = ():string => {
   const date = new Date();
 
   const year = date.getFullYear();

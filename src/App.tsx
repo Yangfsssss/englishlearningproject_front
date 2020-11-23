@@ -11,7 +11,15 @@ import { initializeRecords } from "./reducers/recordReducer";
 import { initializeQAUnits } from "./reducers/QAUnitReducer";
 import { initializeSections } from "./reducers/sectionReducer";
 
-const App = () => {
+import { Section, QAUnit, Record } from "./types";
+
+interface RootState {
+  sections: Section[];
+  QAUnits: QAUnit[];
+  records: Record[];
+}
+
+const App: React.FC = () => {
   const [currentUser, setCurrentUser] = useState(null);
 
   const dispatch = useDispatch();
@@ -22,25 +30,32 @@ const App = () => {
     dispatch(initializeSections());
   }, [dispatch]);
 
-  const state = useSelector((state) => state);
+  const state = useSelector((state: RootState) => state);
 
-  const sections = state.sections.data;
-  const QAUnits = state.QAUnits.data;
-  const records = state.records.data;
+  const sections = state.sections;
+  const QAUnits = state.QAUnits;
+  const records = state.records;
 
   const dataStatus = {
-    sections: state.sections.ready,
-    QAUnits: state.QAUnits.ready,
-    records: state.records.ready
+    sections: state.sections.length > 1 ? true : false,
+    QAUnits: state.QAUnits.length > 1 ? true : false,
+    records: state.records.length > 1 ? true : false
   };
+
+  console.log(dataStatus);
+  console.log(sections);
+  console.log(QAUnits);
+  console.log(records);
 
   return (
     <Div className="App">
       <GlobalStyle />
+
       <Router>
         <Route exact path="/">
           <LoginForm setCurrentUser={setCurrentUser} />
         </Route>
+
         <Route path="/home">
           <Home
             currentUser={currentUser}

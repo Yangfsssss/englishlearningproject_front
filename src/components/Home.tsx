@@ -9,11 +9,19 @@ import StudyReview from "./studyReview/index";
 import DailyLearningStuff from "./dailylearningstuff/index";
 import Indicator from "./Indicator";
 
-const Home = ({ currentUser, sections, QAUnits, records, dataStatus }) => {
+import { Section, QAUnit, Record, DataStatus } from "../types";
+
+const Home: React.FC<{
+  currentUser: string;
+  sections: Section[];
+  QAUnits: QAUnit[];
+  records: Record[];
+  dataStatus: DataStatus;
+}> = ({ currentUser, sections, QAUnits, records, dataStatus }) => {
   let { path, url } = useRouteMatch();
   let location = useLocation();
 
-  let somewhere;
+  let somewhere: string = "";
   switch (location.pathname) {
     case "/home":
       somewhere = "/";

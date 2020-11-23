@@ -2,7 +2,9 @@ import React from "react";
 
 import { Div, Span, Img } from "../styledComponents/General";
 
-const Indicator = ({ dataStatus }) => {
+import { DataStatus } from "../types";
+
+const Indicator: React.FC<{ dataStatus: DataStatus }> = ({ dataStatus }) => {
   return (
     <Div position="absolute" left="70%">
       <Div height="30px">

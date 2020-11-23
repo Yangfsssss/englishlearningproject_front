@@ -2,7 +2,12 @@ import React, { useState } from "react";
 
 import { Div } from "../../../styledComponents/General";
 
-const QAReview = ({ QAUnits, visibility }) => {
+import { QAUnit } from "../../../types";
+
+const QAReview: React.FC<{ QAUnits: QAUnit[]; visibility: boolean }> = ({
+  QAUnits,
+  visibility
+}) => {
   const [QAType, setQAType] = useState("Select");
   const [QAUnitsToShow, setQAUnitsToShow] = useState(QAUnits);
 

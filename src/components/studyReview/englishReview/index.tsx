@@ -5,12 +5,14 @@ import { Div } from "../../../styledComponents/General";
 import StudyReviewDaily from "./StudyReviewDaily";
 import DisplayScreen from "./DisplayScreen";
 
-const EnglishReview = ({ sections, visibility }) => {
+import { Section } from "../../../types";
+
+const EnglishReview: React.FC<{ sections: Section[]; visibility: boolean }> = ({
+  sections,
+  visibility
+}) => {
   const [choseItem, setChoseItem] = useState(null);
   if (!sections) return null;
-  // console.log("++++++++++++");
-  // console.log(sections);
-  // console.log("---------------------");
   else
     return (
       <Div
