@@ -13,28 +13,31 @@ import {
 
 import { Record, Item } from "../../types";
 
+interface Current {
+  clientHeight: number;
+}
+
 const RecordUnitItemDetail: React.FC<{ item: Item; recordId: string }> = ({
   item,
   recordId
 }) => {
-  const [divHeight, setDivHeight] = useState(null);
+  const [divHeight, setDivHeight] = useState<string>("0");
   const dispatch = useDispatch();
 
   const aRef = useRef(null);
   const divRef = useRef(null);
 
+  let { current } = useRef(null);
+  let { clientHeight: height } = current;
+
   useEffect(() => {
-    setDivHeight(`${aRef.current.clientHeight}px`);
+    setDivHeight(`${current.clientHeight}px`);
   }, []);
 
   const handleDeleteItem = async () => {
     if (window.confirm("Are you sure you want to delete?")) {
       const res = await dispatch(deleteRecordItem(recordId, item._id));
-      if (res.status === 200) {
-        alert("Deleted!");
-      } else {
-        alert("Delete failed,please try again");
-      }
+      alert(res);
     }
   };
 

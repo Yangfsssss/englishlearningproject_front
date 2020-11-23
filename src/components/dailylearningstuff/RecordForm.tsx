@@ -37,7 +37,7 @@ const NewRecord: React.FC = () => {
     let date = getDate();
     const newRecord = {
       date,
-      item: [
+      items: [
         {
           memo: memoInputEl.current.value,
           url: urlInputEl.current.value
