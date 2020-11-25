@@ -20,7 +20,7 @@ interface RootState {
 }
 
 const App: React.FC = () => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState<string|null>(null);
 
   const dispatch = useDispatch();
 
@@ -42,10 +42,10 @@ const App: React.FC = () => {
     records: state.records.length > 1 ? true : false
   };
 
-  console.log(dataStatus);
-  console.log(sections);
-  console.log(QAUnits);
-  console.log(records);
+  // console.log(dataStatus);
+  // console.log(sections);
+  // console.log(QAUnits);
+  // console.log(records);
 
   return (
     <Div className="App">

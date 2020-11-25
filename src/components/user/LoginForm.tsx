@@ -6,13 +6,13 @@ import { StyledButton } from "../../styledComponents/user/LoginForm";
 
 import { login, signUp } from "../../services/login";
 
-const LoginForm = ({ setCurrentUser }) => {
+const LoginForm:React.FC<{setCurrentUser:(value:string|null)=>void}> = ({ setCurrentUser }) => {
   const [username, setUsername] = useState("");
   const [signInStyle, setSignInStyle] = useState({ margin: "0" });
 
   const history = useHistory();
 
-  const handleUsernameChange = (e) => setUsername(e.target.value);
+  const handleUsernameChange = (e:any) => setUsername(e.target.value);
 
   const handleChooseSignInForm = () => {
     setSignInStyle({ margin: "0" });
@@ -24,7 +24,7 @@ const LoginForm = ({ setCurrentUser }) => {
     setUsername("");
   };
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (e:any) => {
     e.preventDefault();
 
     const res = await login({ username });
@@ -38,7 +38,7 @@ const LoginForm = ({ setCurrentUser }) => {
     }
   };
 
-  const handleSignUp = async (e) => {
+  const handleSignUp = async (e:any) => {
     e.preventDefault();
 
     const res = await signUp({ username });

@@ -11,13 +11,13 @@ import {
   Img
 } from "../../styledComponents/dailyLearningStuff/recordHistory";
 
-import { Record, Item } from "../../types";
+import { Record,RecordItem} from "../../types";
 
 interface Current {
   clientHeight: number;
 }
 
-const RecordUnitItemDetail: React.FC<{ item: Item; recordId: string }> = ({
+const RecordUnitItemDetail: React.FC<{ item: RecordItem; recordId: string }> = ({
   item,
   recordId
 }) => {
@@ -28,15 +28,15 @@ const RecordUnitItemDetail: React.FC<{ item: Item; recordId: string }> = ({
   const divRef = useRef(null);
 
   let { current } = useRef(null);
-  let { clientHeight: height } = current;
+  // let { clientHeight: height } = current;
 
   useEffect(() => {
-    setDivHeight(`${current.clientHeight}px`);
+    // setDivHeight(`${current.clientHeight}px`);
   }, []);
 
   const handleDeleteItem = async () => {
     if (window.confirm("Are you sure you want to delete?")) {
-      const res = await dispatch(deleteRecordItem(recordId, item._id));
+      const res = await dispatch(deleteRecordItem(recordId, item._id!));
       alert(res);
     }
   };
@@ -87,8 +87,8 @@ const RecordUnit: React.FC<{ record: Record }> = ({ record }) => {
       {record.date}
       <hr />
       <ul>
-        {record.items.map((item: Item) => (
-          <RecordUnitItemDetail item={item} recordId={record.id} />
+        {record.items.map((item: RecordItem) => (
+          <RecordUnitItemDetail item={item} recordId={record.id!} />
         ))}
       </ul>
     </Div>

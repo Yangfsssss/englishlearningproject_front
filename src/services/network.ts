@@ -2,7 +2,13 @@ import axios from "axios";
 // import sha256 from 'sha256'
 // import md5 from 'md5'
 
-import { Section, Record, QAUnit } from "../types";
+import {
+  SectionItemToSend,
+  Section,
+  Record,
+  RecordItemToSend,
+  QAUnit
+} from "../types";
 
 const baseUrl = "https://mjlrb.sse.codesandbox.io/api";
 
@@ -26,12 +32,12 @@ const getQAUnits = async () => {
 //   return res.data;
 // };
 
-const saveSection = async (newSection: Section) => {
+const saveSection = async (newSection: SectionItemToSend) => {
   const res = await axios.post<Section>(`${baseUrl}/sections`, newSection);
   return res;
 };
 
-const saveRecord = async (newRecord: Record) => {
+const saveRecord = async (newRecord: RecordItemToSend) => {
   const res = await axios.post<Record>(
     `${baseUrl}/dailylearningstuff`,
     newRecord

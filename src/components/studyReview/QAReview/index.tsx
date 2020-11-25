@@ -21,13 +21,15 @@ const QAReview: React.FC<{ QAUnits: QAUnit[]; visibility: boolean }> = ({
     // console.log(QAUnitsToShow);
     // console.log("QAUnitsToShow--------");
 
-    const handleSelectQAType = (e) => {
+    const handleSelectQAType = (e: any) => {
       setQAType(e.target.value);
-      e.target.value === "Select"
-        ? setQAUnitsToShow(QAUnits)
-        : setQAUnitsToShow(
-            QAUnits.filter((QAUnit) => QAUnit.type === e.target.value)
-          );
+      if (e.target.value === "Select") {
+        setQAUnitsToShow(QAUnits);
+      } else {
+        setQAUnitsToShow(
+          QAUnits.filter((QAUnit) => QAUnit.type === e.target.value)
+        );
+      }
     };
     return (
       <Div

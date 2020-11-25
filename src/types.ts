@@ -9,6 +9,11 @@ export interface SectionItem {
   wordUnits: WordUnit[];
 }
 
+export interface SectionItemToSend {
+  date: string;
+  item: SectionItem;
+}
+
 export interface Section {
   date: string;
   items: SectionItem[];
@@ -19,6 +24,11 @@ export interface RecordItem {
   memo: string;
   url: string;
   _id?: string;
+}
+
+export interface RecordItemToSend {
+  date: string;
+  item: RecordItem;
 }
 
 export interface Record {

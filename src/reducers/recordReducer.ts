@@ -1,6 +1,6 @@
 import network from "../services/network";
 
-import { Record } from "../types";
+import { Record, RecordItemToSend } from "../types";
 
 interface DeletionInfo {
   recordId: string;
@@ -15,25 +15,25 @@ interface RecordAction {
 
 export const initializeRecords = () => {
   return async (dispatch: (value: RecordAction) => void) => {
-    const { data: res } = await network.getRecords();
+    const { data: resData } = await network.getRecords();
     dispatch({
       type: "INIT_RECORDS",
-      data: res
+      data: resData
     });
   };
 };
 
-export const createNewRecord = (newRecord: Record) => {
+export const createNewRecord = (newRecord: RecordItemToSend) => {
   return async (dispatch: (value: RecordAction) => void) => {
-    const { data: res, status: dataStatus } = await network.saveRecord(
+    const { data: resData, status: resStatus } = await network.saveRecord(
       newRecord
     );
     dispatch({
       type: "NEW_RECORD",
-      data: res,
-      status: dataStatus
+      data: resData,
+      status: resStatus
     });
-    return dataStatus;
+    return resStatus;
   };
 };
 
@@ -65,10 +65,11 @@ const recordReducer = (
           record.id === newRecordId ? (action.data as Record) : record
         );
         return data;
-      } else {
+      } else if (action.status === 200) {
         const data = state.concat(action.data as Record);
         return data;
       }
+      return state
     }
     case "DELETE": {
       const {

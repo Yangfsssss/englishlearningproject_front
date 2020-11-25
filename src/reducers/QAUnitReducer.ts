@@ -19,12 +19,14 @@ export const initializeQAUnits = () => {
 
 export const createNewQAUnit = (newQAUnit: QAUnit) => {
   return async (dispatch: (value: QAUnitAction) => void) => {
-    const { data: res } = await network.saveQAUnit(newQAUnit);
+    const { data: resData, status: resStatus } = await network.saveQAUnit(
+      newQAUnit
+    );
     dispatch({
       type: "New_QAUNIT",
-      data: res
+      data: resData
     });
-    return res;
+    return resStatus;
   };
 };
 

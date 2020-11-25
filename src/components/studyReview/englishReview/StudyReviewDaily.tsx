@@ -29,12 +29,15 @@ const DailyDetail: React.FC<{ item: SectionItem; onClick: () => void }> = ({
 
 const StudyReviewDaily: React.FC<{
   section: Section;
-  setChoseItem: (value: SectionItem) => void;
+  setChoseItem: (value: SectionItem|null) => void;
 }> = ({ section, setChoseItem }) => {
   const handleShowWordUnits = (title: string): void => {
-    const matchedItem = section.items.find((item) => item.title === title);
+    const matchedItem = section.items.find(
+      (item) => item.title === title
+    ) as SectionItem;
     setChoseItem(matchedItem);
   };
+
 
   return (
     <DivS margin="0 0 10px 0">

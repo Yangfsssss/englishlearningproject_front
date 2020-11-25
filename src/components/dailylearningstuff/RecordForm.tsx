@@ -30,19 +30,19 @@ const NewRecord: React.FC = () => {
   // const handleMemoChange = (e) => setMemo(e.target.value);
   // const handleUrlChange = (e) => setUrl(e.target.value);
 
-  const handleFormSubmit = async (e) => {
+  const handleFormSubmit = async (e:any) => {
     e.preventDefault();
     e.persist();
 
     let date = getDate();
     const newRecord = {
       date,
-      items: [
+      item: 
         {
-          memo: memoInputEl.current.value,
-          url: urlInputEl.current.value
+          memo: 'memoInputEl.current.value',
+          url: 'urlInputEl.current.value'
         }
-      ]
+      
     };
 
     // console.log(newRecord);
@@ -50,12 +50,12 @@ const NewRecord: React.FC = () => {
     // setMemo(" ");
     // setUrl(" ");
     // setPlaceholder({ memo: "memo", url: "url" });
-    const res = await dispatch(createNewRecord(newRecord));
+    const resStatus = await dispatch(createNewRecord(newRecord)) as unknown;
 
-    if (res.status === 200) {
+    if (resStatus === 200||resStatus === 201) {
       alert("Saved!");
       e.target.reset();
-      memoInputEl.current.focus();
+      // memoInputEl.current.focus();
     } else {
       alert("Save failed,please try again");
     }

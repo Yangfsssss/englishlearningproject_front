@@ -4,7 +4,7 @@ import { Li, Span } from "../../../styledComponents/General";
 
 import { SectionItem } from "../../../types";
 
-const DisplayScreen: React.FC<{ choseItem: SectionItem }> = ({ choseItem }) => {
+const DisplayScreen: React.FC<{ choseItem: SectionItem|null }> = ({ choseItem }) => {
   return (
     choseItem && (
       <ul>

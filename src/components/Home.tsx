@@ -12,7 +12,7 @@ import Indicator from "./Indicator";
 import { Section, QAUnit, Record, DataStatus } from "../types";
 
 const Home: React.FC<{
-  currentUser: string;
+  currentUser: string|null;
   sections: Section[];
   QAUnits: QAUnit[];
   records: Record[];
