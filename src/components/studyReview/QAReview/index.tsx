@@ -4,31 +4,21 @@ import { Div } from "../../../styledComponents/General";
 
 import { QAUnit } from "../../../types";
 
-const QAReview: React.FC<{ QAUnits: QAUnit[]; visibility: boolean }> = ({
-  QAUnits,
-  visibility
-}) => {
-  const [QAType, setQAType] = useState("Select");
-  const [QAUnitsToShow, setQAUnitsToShow] = useState(QAUnits);
-
-  // console.log("QAUnits+++++");
-  // console.log(QAUnits);
-  // console.log("QAUnits---------");
+const QAReview: React.FC<{
+  QAUnits: QAUnit[];
+  visibility: boolean;
+}> = ({ QAUnits, visibility }) => {
+  const [QAType, setQAType] = useState<string>("Select");
+  const [QAUnitsToShow, setQAUnitsToShow] = useState<QAUnit[]>(QAUnits);
 
   if (!QAUnits) return null;
   else {
-    // console.log("QAUnitsToShow+++++");
-    // console.log(QAUnitsToShow);
-    // console.log("QAUnitsToShow--------");
-
-    const handleSelectQAType = (e: any) => {
-      setQAType(e.target.value);
-      if (e.target.value === "Select") {
+    const handleSelectQAType = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setQAType(e.currentTarget.value);
+      if (e.currentTarget.value === "Select") {
         setQAUnitsToShow(QAUnits);
       } else {
-        setQAUnitsToShow(
-          QAUnits.filter((QAUnit) => QAUnit.type === e.target.value)
-        );
+        setQAUnitsToShow(QAUnits.filter((QAUnit) => QAUnit.type === e.currentTarget.value));
       }
     };
     return (
@@ -50,12 +40,7 @@ const QAReview: React.FC<{ QAUnits: QAUnit[]; visibility: boolean }> = ({
 
         <Div>
           {QAUnitsToShow.map((QAUnit) => (
-            <Div
-              width="60em"
-              margin="0 0 15px 0"
-              border="1px solid black"
-              borderRadius="5px"
-            >
+            <Div width="60em" margin="0 0 15px 0" border="1px solid black" borderRadius="5px">
               {/* {QAUnit.type} */}
               {QAUnit.date}
               <hr />

@@ -12,6 +12,7 @@ export const Li = styled.li`
 export const Span = styled.span`
   display: ${(props:DefaultTheme) => props.display};
   width: ${(props) => props.width};
+  padding: ${(props) => props.padding};
   font-size: ${(props) => props.fontSize};
   font-family: ${(props) => props.fontFamily};
   cursor: ${(props) => props.cursor};
@@ -35,8 +36,10 @@ export const Img = styled.img`
   }
 `;
 
+
+
 export const Input = styled.input.attrs({
-  type: "text"
+  type: "text",
 })`
   display: ${(props:DefaultTheme) => props.display};
   font-size: ${(props) => props.fontSize};
@@ -53,4 +56,30 @@ export const Input = styled.input.attrs({
   vertical-align: ${(props) => props.verticalAlign};
   border-radius: 0.2em;
   overflow-wrap: break-word;
+
+`;
+
+export const StyledButton = styled.button`
+  /* display: ${(props:DefaultTheme) => props.display}; */
+  /* padding: 0.3em 0.8em; */
+  /* border: none; */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #58a linear-gradient(hsla(0, 0%, 100%, 0.2), transparent);
+  border-radius: 0.2em;
+  box-shadow: 0 0.05em 0.25em rgba(0, 0, 0, 0.5);
+  font-size: 2em;
+  /* line-height: ${(props) => props.height}; */
+  color: white;
+  text-shadow: 0 -0.05em 0.05em rgba(0, 0, 0, 0.5);
+  width:120px;
+  height:54px;
+  /* margin: ${(props) => props.margin}; */
+  position: ${(props) => props.position};
+  left: ${(props) => props.left};
+  top: ${(props) => props.top};
+  right: ${(props) => props.right};
+  /* transform: ${(props) => props.transform}; */
+  /* text-align:center; */
+  /* vertical-align: middle; */
+  /* box-sizing: border-box; */
 `;

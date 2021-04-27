@@ -10,35 +10,31 @@ interface SectionAction {
 
 export const initializeSections = () => {
   return async (dispatch: (value: SectionAction) => void) => {
-    const { data: resData } = await network.getSections();
-    dispatch({
-      type: "INIT_DATA",
-      data: resData
-    });
+    try {
+      const { data: resData } = await network.getSections();
+      dispatch({
+        type: "INIT_DATA",
+        data: resData,
+      });
+    } catch (e) {
+      console.error(e);
+    }
   };
 };
 
-// export const addAWord = (id, newSection) => {
-//   return async (dispatch) => {
-//     const res = await network.saveWord(id, newSection);
-//     dispatch({
-//       type: "ADD_A_WORD",
-//       data: res
-//     });
-//   };
-// };
-
 export const createNewSection = (newSection: SectionItemToSend) => {
   return async (dispatch: (value: SectionAction) => void) => {
-    const { data: resData, status: resStatus } = await network.saveSection(
-      newSection
-    );
-    dispatch({
-      type: "NEW_SECTION",
-      data: resData,
-      status: resStatus
-    });
-    return resStatus;
+    try {
+      const { data: resData, status: resStatus } = await network.saveSection(newSection);
+      dispatch({
+        type: "NEW_SECTION",
+        data: resData,
+        status: resStatus,
+      });
+      return resStatus;
+    } catch (e) {
+      console.error(e);
+    }
   };
 };
 
@@ -111,16 +107,10 @@ const sectionReducer = (state: Section[] = [], action: SectionAction) => {
   switch (action.type) {
     case "INIT_DATA":
       return action.data as Section[];
-    // case "ADD_A_WORD":
-    //   return state.map((section) =>
-    //     section.id === action.data.id ? action.data : section
-    //   );
     case "NEW_SECTION": {
       if (action.status === 201) {
         const { id: returnedSectionId } = action.data as Section;
-        const data = state.map((section) =>
-          section.id === returnedSectionId ? action.data : section
-        );
+        const data = state.map((section) => (section.id === returnedSectionId ? action.data : section));
         return data;
       } else if (action.status === 200) {
         const data = state.concat(action.data);

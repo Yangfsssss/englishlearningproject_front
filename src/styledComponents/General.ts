@@ -121,13 +121,14 @@ export const StyledButton = styled.button`
   box-sizing: content-box;
 `;
 
-export const Textarea = styled.textarea`
+
+export const Textarea = styled.textarea.attrs({
+  rows:10
+})`
   display: ${(props:DefaultTheme) => props.display};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   margin-right: ${(props) => props.marginRight};
-  rows:${(props:DefaultTheme) => props.rows};
-  cols:${(props:DefaultTheme) => props.cols};
   font-size: ${(props) => props.fontSize};
   font-family: ${(props) => props.fontFamily};
   line-height: ${(props) => props.height};

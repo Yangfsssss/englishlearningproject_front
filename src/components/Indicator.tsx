@@ -6,7 +6,7 @@ import { DataStatus } from "../types";
 
 const Indicator: React.FC<{ dataStatus: DataStatus }> = ({ dataStatus }) => {
   return (
-    <Div position="absolute" left="70%">
+    <Div position="absolute" top='-3%' left="62%">
       <Div height="30px">
         <Div display="inline-block" margin="0 5px 0 0" padding="5px 0 5px 0">
           <Img

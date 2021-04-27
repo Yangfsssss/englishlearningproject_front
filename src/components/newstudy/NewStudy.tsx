@@ -1,42 +1,37 @@
 import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
-// import network from "../services/network";
 
-// import addWord from '../../reducers/sectionReducer'
 import { createNewRecord } from "../../reducers/recordReducer";
 import { createNewSection } from "../../reducers/sectionReducer";
 import { getDate } from "../../utils";
 
-import { Div, StyledButton } from "../../styledComponents/General";
-import { Li, Span, Img, Input } from "../../styledComponents/newStudy/newStudy";
+import { Div } from "../../styledComponents/General";
+import { Li, Span, Img, Input, StyledButton } from "../../styledComponents/newStudy/newStudy";
 
-import {
-  WordUnit,
-  SectionItemToSend,
-  RecordItemToSend
-} from "../../types";
+import { WordUnit, SectionItemToSend, RecordItemToSend } from "../../types";
 
 const NewStudy: React.FC = () => {
-  const [title, setTitle] = useState("");
-  const [url, setUrl] = useState("");
-  const [rawWordUnit, setRawWordUnit] = useState("");
+  const [title, setTitle] = useState<string>("");
+  const [url, setUrl] = useState<string>("");
+  const [rawWordUnit, setRawWordUnit] = useState<string>("");
   const [wordUnits, setWordUnits] = useState<WordUnit[]>([]);
-  const [isUrlSaved, setIsUrlSaved] = useState(false);
-  const [isTitleSaved, setIsTitleSaved] = useState(false);
-  const [isAddToRecord, setIsAddToRecord] = useState(false);
+  const [isUrlSaved, setIsUrlSaved] = useState<boolean>(false);
+  const [isTitleSaved, setIsTitleSaved] = useState<boolean>(false);
+  const [isAddToRecord, setIsAddToRecord] = useState<boolean>(false);
 
-  const wordInputEl = useRef(null);
+  const wordInputEl = useRef<HTMLInputElement>(null!);
 
   const dispatch = useDispatch();
+  console.log(dispatch);
 
-  const displayTitle = isTitleSaved ? "none" : "";
-  const displayUrl = isUrlSaved ? "none" : "";
+  // const displayTitle = isTitleSaved ? "none" : "";
+  // const displayUrl = isUrlSaved ? "none" : "";
 
-  const handleTitleChange = (e: any) => setTitle(e.target.value);
-  const handleUrlChange = (e: any) => setUrl(e.target.value);
-  const handleWordChange = (e: any) => setRawWordUnit(e.target.value);
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value);
+  const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => setUrl(e.currentTarget.value);
+  const handleWordChange = (e: React.ChangeEvent<HTMLInputElement>) => setRawWordUnit(e.currentTarget.value);
 
-  const saveTitle = (e: any) => {
+  const saveTitle = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
 
     if (title === "" && title.trim() === "") {
@@ -46,7 +41,7 @@ const NewStudy: React.FC = () => {
     }
   };
 
-  const saveUrl = (e: any) => {
+  const saveUrl = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
 
     if (url === "" && url.trim() === "") {
@@ -56,7 +51,7 @@ const NewStudy: React.FC = () => {
     }
   };
 
-  const saveWord = (e: any) => {
+  const saveWord = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
 
     if (rawWordUnit === "" && rawWordUnit.trim() === "") {
@@ -66,18 +61,18 @@ const NewStudy: React.FC = () => {
 
       let wordUnit = {
         word: rawWordUnit.substr(0, index),
-        translation: rawWordUnit.substr(index + 1)
+        translation: rawWordUnit.substr(index + 1),
       };
 
       setWordUnits(wordUnits.concat(wordUnit));
       setRawWordUnit("");
       if (wordInputEl && wordInputEl.current) {
-        // wordInputEl.current.focus();
+        wordInputEl.current.focus();
       }
     }
   };
 
-  const handleSaveSection = async (e: any) => {
+  const handleSaveSection = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (window.confirm("Finish This Section And Save?")) {
@@ -88,9 +83,9 @@ const NewStudy: React.FC = () => {
           url: url.trim(),
           wordUnits: wordUnits.map((wordUnit) => ({
             word: wordUnit.word.trim(),
-            translation: wordUnit.translation
-          }))
-        }
+            translation: wordUnit.translation,
+          })),
+        },
       } as SectionItemToSend;
 
       let recordStatus;
@@ -101,11 +96,9 @@ const NewStudy: React.FC = () => {
           date: getDate(),
           item: {
             memo: title.trim(),
-            url: url.trim()
-          }
+            url: url.trim(),
+          },
         } as RecordItemToSend;
-
-        console.log(newSection);
 
         let recStatus = dispatch(createNewRecord(newRecord));
         let secStatus = dispatch(createNewSection(newSection));
@@ -116,9 +109,8 @@ const NewStudy: React.FC = () => {
       }
 
       if (
-        (!recordStatus && sectionStatus === 200) ||
-        ((recordStatus === 200 || recordStatus === 201) &&
-          (sectionStatus === 200 || sectionStatus === 201))
+        (!recordStatus && (sectionStatus === 200 || sectionStatus === 201)) ||
+        ((recordStatus === 200 || recordStatus === 201) && (sectionStatus === 200 || sectionStatus === 201))
       ) {
         alert("Saved!");
         setTitle("");
@@ -135,37 +127,41 @@ const NewStudy: React.FC = () => {
 
   const showTitleOrAddButton = () => {
     return isTitleSaved ? (
-      <Span fontSize="32px" fontFamily="Georgia">
+      <Span padding="9px 0" fontSize="32px" fontFamily="Georgia">
         {" "}
         {title}
       </Span>
     ) : (
-      <Input
-        width="21em"
-        height="50px"
-        fontSize="32px"
-        fontFamily="Georgia"
-        value={title}
-        onChange={handleTitleChange}
-      />
+      <>
+        <Input
+          width="21em"
+          height="50px"
+          fontSize="32px"
+          fontFamily="Georgia"
+          value={title}
+          onChange={handleTitleChange}
+        />
+        <StyledButton height="54px" onClick={saveTitle}>
+          Add
+        </StyledButton>
+        {/* <button style={{height:'54px',lineHeight:'54px'}}>Add</button> */}
+      </>
     );
   };
 
   const showUrlOrAddButton = () => {
     return isUrlSaved ? (
-      <Span fontSize="32px" fontFamily="Georgia">
+      <Span padding="9px 0" fontSize="32px" fontFamily="Georgia">
         {" "}
         {url}
       </Span>
     ) : (
-      <Input
-        width="21em"
-        height="50px"
-        fontSize="32px"
-        fontFamily="Georgia"
-        value={url}
-        onChange={handleUrlChange}
-      />
+      <>
+        <Input width="21em" height="50px" fontSize="32px" fontFamily="Georgia" value={url} onChange={handleUrlChange} />
+        <StyledButton height="35px" onClick={saveUrl}>
+          Add
+        </StyledButton>
+      </>
     );
   };
 
@@ -174,20 +170,17 @@ const NewStudy: React.FC = () => {
     setWordUnits(newWordUnits);
   };
 
-  const handleRadioSelection = (e: any) => {
+  const handleRadioSelection = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsAddToRecord(!isAddToRecord);
   };
 
   return (
     <form onSubmit={handleSaveSection}>
-      <Div position="absolute" left="10%" top="10%">
-        <Span fontSize="26px" fontFamily="Georgia">
+      <Div height="54px" position="absolute" left="10%" top="10%">
+        <Span padding="12px 0" fontSize="26px" fontFamily="Georgia">
           Title:
         </Span>
         {showTitleOrAddButton()}
-        <StyledButton height="35px" display={displayTitle} onClick={saveTitle}>
-          Add
-        </StyledButton>
       </Div>
 
       <Div position="absolute" left="10%" top="30%">
@@ -195,9 +188,6 @@ const NewStudy: React.FC = () => {
           URL:
         </Span>
         {showUrlOrAddButton()}
-        <StyledButton height="35px" display={displayUrl} onClick={saveUrl}>
-          Add
-        </StyledButton>
       </Div>
 
       <Div position="absolute" left="10%" top="50%">
@@ -233,19 +223,10 @@ const NewStudy: React.FC = () => {
                     margin="0 0 0 auto"
                   />
                   {"      "}
-                  <Span
-                    display="inline-block"
-                    width="140px"
-                    fontSize="21px"
-                    fontFamily="Georgia"
-                  >
+                  <Span display="inline-block" width="140px" fontSize="21px" fontFamily="Georgia">
                     {wordUnit.word}
                   </Span>
-                  <Span
-                    display="inline-block"
-                    fontSize="21px"
-                    fontFamily="Georgia"
-                  >
+                  <Span display="inline-block" fontSize="21px" fontFamily="Georgia">
                     {"  "}
                     {wordUnit.translation}
                   </Span>
@@ -254,16 +235,12 @@ const NewStudy: React.FC = () => {
         </ul>
       </Div>
 
-      <StyledButton right="0" type="submit">
+      <StyledButton position="absolute" top="6%" right="20%" type="submit">
         Save
       </StyledButton>
 
-      <Div position="absolute" right="0" top="10%">
-        <input
-          type="checkbox"
-          // value={isAddToRecord ? 'yes':'no'}
-          onChange={handleRadioSelection}
-        />
+      <Div position="absolute" right="20%" top="15%">
+        <input type="checkbox" onChange={handleRadioSelection} />
         <Span>add to record</Span>
       </Div>
     </form>

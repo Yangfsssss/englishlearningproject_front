@@ -8,19 +8,13 @@ import { Div as DivS } from "../../../styledComponents/studyReview/englishReview
 
 import { Section, SectionItem } from "../../../types";
 
-const DailyDetail: React.FC<{ item: SectionItem; onClick: () => void }> = ({
+const DailyDetail: React.FC<{ item: SectionItem; handleShowWordUnits: () => void }> = ({
   item,
-  onClick
+  handleShowWordUnits,
 }) => {
   return (
     <Div width="100%">
-      <Span
-        padding="0 0 0 2px"
-        fontSize="22px"
-        fontFamily="Georgia"
-        cursor="pointer"
-        onClick={onClick}
-      >
+      <Span padding="0 0 0 2px" fontSize="22px" fontFamily="Georgia" cursor="pointer" onClick={handleShowWordUnits}>
         {item.title}
       </Span>
     </Div>
@@ -29,24 +23,18 @@ const DailyDetail: React.FC<{ item: SectionItem; onClick: () => void }> = ({
 
 const StudyReviewDaily: React.FC<{
   section: Section;
-  setChoseItem: (value: SectionItem|null) => void;
+  setChoseItem: (value: SectionItem | null) => void;
 }> = ({ section, setChoseItem }) => {
   const handleShowWordUnits = (title: string): void => {
-    const matchedItem = section.items.find(
-      (item) => item.title === title
-    ) as SectionItem;
+    const matchedItem = section.items.find((item) => item.title === title) as SectionItem;
     setChoseItem(matchedItem);
   };
-
 
   return (
     <DivS margin="0 0 10px 0">
       <Span padding="0 0 0 2px">{section.date}</Span>
       {section.items.map((item) => (
-        <DailyDetail
-          item={item}
-          onClick={() => handleShowWordUnits(item.title)}
-        />
+        <DailyDetail item={item} handleShowWordUnits={() => handleShowWordUnits(item.title)} />
       ))}
     </DivS>
   );

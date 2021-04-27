@@ -1,5 +1,11 @@
 {
   "compilerOptions": {
+    "plugins": [
+      {
+        "name": "typescript-styled-plugin",
+        "lint": {}
+      }
+    ],
     "target": "es5",
     "lib": [
       "dom",
@@ -18,9 +24,8 @@
     "noEmit": true,
     "jsx": "react",
     "downlevelIteration": true,
-    "allowJs": true
+    "allowJs": true,
+    "noImplicitAny": true
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }
