@@ -4,78 +4,69 @@ import { useDispatch } from "react-redux";
 import { StyledButton } from "../../styledComponents/General";
 import {
   Div,
-  Input
+  Input,
 } from "../../styledComponents/dailyLearningStuff/recordForm";
 
 import { createNewRecord } from "../../reducers/recordReducer";
 import { getDate } from "../../utils";
 
-// import { Input } from "antd";
-// import formStyle from "./RecordForm.css";
-// const { TextArea } = Input;
-
 const NewRecord: React.FC = () => {
-  // const [memo, setMemo] = useState("");
-  // const [url, setUrl] = useState("");
-  // const [placeholder, setPlaceholder] = useState({ memo: "memo", url: "url" });
-
   const dispatch = useDispatch();
 
-  const memoInputEl = useRef(null);
-  const urlInputEl = useRef(null);
-  const formEl = useRef(null);
+  const memoInputEl = useRef<HTMLInputElement>(
+    null!
+  );
+  const urlInputEl = useRef<HTMLInputElement>(
+    null!
+  );
+  const formEl = useRef<HTMLFormElement>(
+    null!
+  );
 
-  // const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
-
-  // const handleMemoChange = (e) => setMemo(e.target.value);
-  // const handleUrlChange = (e) => setUrl(e.target.value);
-
-  const handleFormSubmit = async (e:any) => {
+  const handleFormSubmit = async (
+    e: React.ChangeEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
     e.persist();
 
     let date = getDate();
     const newRecord = {
       date,
-      item: 
-        {
-          memo: 'memoInputEl.current.value',
-          url: 'urlInputEl.current.value'
-        }
-      
+      item: {
+        memo: memoInputEl.current.value,
+        url: urlInputEl.current.value,
+      },
     };
 
-    // console.log(newRecord);
-    // console.log(e.target.reset);
-    // setMemo(" ");
-    // setUrl(" ");
-    // setPlaceholder({ memo: "memo", url: "url" });
-    const resStatus = await dispatch(createNewRecord(newRecord)) as unknown;
+    const resStatus = (await dispatch(
+      createNewRecord(newRecord)
+    )) as unknown;
 
-    if (resStatus === 200||resStatus === 201) {
+    if (
+      resStatus === 200 ||
+      resStatus === 201
+    ) {
       alert("Saved!");
       e.target.reset();
-      // memoInputEl.current.focus();
+      if (
+        memoInputEl &&
+        memoInputEl.current
+      ) {
+        memoInputEl.current.focus();
+      }
     } else {
-      alert("Save failed,please try again");
+      alert(
+        "Save Failed,Please Try Again!"
+      );
     }
-
-    // e.target.focus();
-    // forceUpdate();
-    // formEl.current.reset();
-    // memoInputEl.current.reset();
-    // const form = document.getElementsByTagName("form");
-    // console.log(form);
-    // console.log(formEl.current.reset);
-
-    // console.log(memoInputEl);
-    // urlInputEl.current.reset();
-    // console.log(urlInputEl);
   };
 
   return (
     <>
-      <form ref={formEl} onSubmit={handleFormSubmit}>
+      <form
+        ref={formEl}
+        onSubmit={handleFormSubmit}
+      >
         <Div
           padding="0 8px"
           position="absolute"
@@ -87,20 +78,6 @@ const NewRecord: React.FC = () => {
           borderRadius="5px"
           backgroundColor="white"
         >
-          {/* <TextArea
-            // className={textarea}
-            bordered={false}
-            autoSize={{ minRows: 1, maxRows: 6 }}
-            placeholder="memo"
-            // display="block"
-            // width="300px"
-            // height="40px"
-            // fontSize="30px"
-            // padding="0 0 0 0"
-            // border="none"
-            // borderRadius="5px"
-            // focusOutline="none"
-          /> */}
           <Input
             ref={memoInputEl}
             placeholder="memo"
@@ -114,10 +91,14 @@ const NewRecord: React.FC = () => {
             borderRadius="5px"
             focusOutline="none"
             overflow="wrap"
-            // value={memo}
-            // onChange={handleMemoChange}
           />
-          <hr style={{ width: "95%", margin: "0 auto", textAlign: "center" }} />
+          <hr
+            style={{
+              width: "95%",
+              margin: "0 auto",
+              textAlign: "center",
+            }}
+          />
           <Input
             ref={urlInputEl}
             placeholder="url"
@@ -129,11 +110,14 @@ const NewRecord: React.FC = () => {
             border="none"
             borderRadius="5px"
             focusOutline="none"
-            // value={url}
-            // onChange={handleUrlChange}
           />
         </Div>
-        <StyledButton type="submit" position="absolute" left="80%" top="0">
+        <StyledButton
+          type="submit"
+          position="absolute"
+          left="80%"
+          top="0"
+        >
           Save
         </StyledButton>
       </form>

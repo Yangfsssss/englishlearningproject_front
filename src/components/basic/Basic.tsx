@@ -1,47 +1,40 @@
 import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 
-import {
-  Div,
-  Input,
-  StyledButton,
-  P,
-  Textarea
-} from "../../styledComponents/General";
+import { Div, Input, StyledButton, P, Textarea } from "../../styledComponents/General";
 
 import { createNewQAUnit } from "../../reducers/QAUnitReducer";
 import { getDate } from "../../utils";
 
 const Basic: React.FC = () => {
-  const [question, setQuestion] = useState(" ");
-  const [answer, setAnswer] = useState(" ");
-  const [isQuestionAdded, setIsQuestionAdded] = useState(false);
-  const [QAType, setQAType] = useState("JavaScriptA");
+  const [question, setQuestion] = useState<string>(" ");
+  const [answer, setAnswer] = useState<string>(" ");
+  const [isQuestionAdded, setIsQuestionAdded] = useState<boolean>(false);
+  const [QAType, setQAType] = useState<string>("JavaScriptA");
 
   const dispatch = useDispatch();
 
-  const textareaRef = useRef(null);
-  // const shadowTextareaRef = useRef(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null!);
 
-  const handleQuestionChange = (e: any) => {
-    setQuestion(e.target.value);
+  const handleQuestionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuestion(e.currentTarget.value);
   };
 
   const handleAddQuestion = () => {
     setIsQuestionAdded(true);
   };
 
-  const handleTextareaChange = (e: any) => {
-    setAnswer(e.target.value);
+  const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setAnswer(e.currentTarget.value);
   };
 
   const handleSaveQA = async () => {
-    if (window.confirm("finish this question and save?")) {
+    if (window.confirm("Finish This Question And Save?")) {
       const newQAUnit = {
         type: QAType,
         date: getDate(),
         question,
-        answer
+        answer,
       };
 
       const resStatus = (await dispatch(createNewQAUnit(newQAUnit))) as unknown;
@@ -52,13 +45,13 @@ const Basic: React.FC = () => {
         setAnswer(" ");
         setQAType("JavaScriptA");
       } else {
-        alert("Save failed,please try again");
+        alert("Save Failed,Please Try Again");
       }
     }
   };
 
-  const handleSelectQAType = (e: any) => {
-    setQAType(e.target.value);
+  const handleSelectQAType = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setQAType(e.currentTarget.value);
   };
 
   const showQuestionOrInputField = () => {
@@ -98,7 +91,6 @@ const Basic: React.FC = () => {
         </P>
         <Textarea
           width="21em"
-          // rows="10"
           marginRight="2px"
           fontSize="32px"
           fontFamily="Georgia"

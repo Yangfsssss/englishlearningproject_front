@@ -2,29 +2,35 @@ import axios from "axios";
 // import sha256 from 'sha256'
 // import md5 from 'md5'
 
-import {
-  SectionItemToSend,
-  Section,
-  Record,
-  RecordItemToSend,
-  QAUnit
-} from "../types";
+import { SectionItemToSend, Section, Record, RecordItemToSend, QAUnit } from "../types";
 
 const baseUrl = "https://mjlrb.sse.codesandbox.io/api";
 
 const getSections = async () => {
-  let res = await axios.get<Section[]>(`${baseUrl}/sections`);
-  return res;
+  // try {
+    let res = await axios.get<Section[]>(`${baseUrl}/sections`);
+    return res;
+  // } catch (e) {
+  //   console.error(e);
+  // }
 };
 
 const getRecords = async () => {
-  let res = await axios.get<Record[]>(`${baseUrl}/dailylearningstuff`);
-  return res;
+  // try {
+    let res = await axios.get<Record[]>(`${baseUrl}/dailylearningstuff`);
+    return res;
+  // } catch (e) {
+  //   console.error(e);
+  // }
 };
 
 const getQAUnits = async () => {
-  let res = await axios.get<QAUnit[]>(`${baseUrl}/basic`);
-  return res;
+  // try {
+    let res = await axios.get<QAUnit[]>(`${baseUrl}/basic`);
+    return res;
+  // } catch (e) {
+    // console.error(e);
+  // }
 };
 
 // const saveWord = async (id, newSection) => {
@@ -33,26 +39,39 @@ const getQAUnits = async () => {
 // };
 
 const saveSection = async (newSection: SectionItemToSend) => {
+  // try {
   const res = await axios.post<Section>(`${baseUrl}/sections`, newSection);
   return res;
+  // } catch (e) {
+  // console.error(e);
+  // }
 };
 
 const saveRecord = async (newRecord: RecordItemToSend) => {
-  const res = await axios.post<Record>(
-    `${baseUrl}/dailylearningstuff`,
-    newRecord
-  );
-  return res;
+  // try {
+    const res = await axios.post<Record>(`${baseUrl}/dailylearningstuff`, newRecord);
+    return res;
+  // } catch (e) {
+  //   console.error(e);
+  // }
 };
 
 const saveQAUnit = async (newQAUnit: QAUnit) => {
-  const res = await axios.post<QAUnit>(`${baseUrl}/basic`, newQAUnit);
-  return res;
+  // try {
+    const res = await axios.post<QAUnit>(`${baseUrl}/basic`, newQAUnit);
+    return res;
+  // } catch (e) {
+  //   console.error(e);
+  // }
 };
 
 const deleteItem = async (id: string) => {
-  const res: string = await axios.delete(`${baseUrl}/dailylearningstuff/${id}`);
-  return res;
+  // try {
+    const res = await axios.delete(`${baseUrl}/dailylearningstuff/${id}`);
+    return res;
+  // } catch (e) {
+  //   console.error(e);
+  // }
 };
 
 // const translate = async (word) => {
@@ -105,5 +124,5 @@ export default {
   saveSection,
   saveRecord,
   saveQAUnit,
-  deleteItem
+  deleteItem,
 };

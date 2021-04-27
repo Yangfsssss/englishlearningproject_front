@@ -1,18 +1,25 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
 import { Div, Input, Span } from "../../styledComponents/General";
 import { StyledButton } from "../../styledComponents/user/LoginForm";
 
 import { login, signUp } from "../../services/login";
+// import { initUser } from "../../reducers/userReducer";
 
-const LoginForm:React.FC<{setCurrentUser:(value:string|null)=>void}> = ({ setCurrentUser }) => {
-  const [username, setUsername] = useState("");
-  const [signInStyle, setSignInStyle] = useState({ margin: "0" });
+interface SignInStyle {
+  margin: string;
+}
 
+const LoginForm: React.FC<{ setCurrentUser: (value: string | null) => void }> = ({ setCurrentUser }) => {
+  const [username, setUsername] = useState<string>("");
+  const [signInStyle, setSignInStyle] = useState<SignInStyle>({ margin: "0" });
+
+  const dispatch = useDispatch();
   const history = useHistory();
 
-  const handleUsernameChange = (e:any) => setUsername(e.target.value);
+  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.currentTarget.value);
 
   const handleChooseSignInForm = () => {
     setSignInStyle({ margin: "0" });
@@ -24,21 +31,21 @@ const LoginForm:React.FC<{setCurrentUser:(value:string|null)=>void}> = ({ setCur
     setUsername("");
   };
 
-  const handleLogin = async (e:any) => {
+  const handleLogin = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const res = await login({ username });
 
     if (res.status === 200) {
       alert("Sign In Succeed!");
-      setCurrentUser(username);
+      dispatch({ type: "INIT_USER", data: res });
       history.push("/home");
     } else {
       alert("Sign in Failed,Please try again");
     }
   };
 
-  const handleSignUp = async (e:any) => {
+  const handleSignUp = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const res = await signUp({ username });
@@ -53,7 +60,7 @@ const LoginForm:React.FC<{setCurrentUser:(value:string|null)=>void}> = ({ setCur
   };
 
   return (
-    <Div //0
+    <Div
       position="absolute"
       left="50%"
       top="50%"
@@ -61,9 +68,7 @@ const LoginForm:React.FC<{setCurrentUser:(value:string|null)=>void}> = ({ setCur
       border="2px black solid"
       borderRadius=".3em"
     >
-      <Div //1-1
-        margin="5px 0 5px 5px"
-      >
+      <Div margin="5px 0 5px 5px">
         <Span onClick={handleChooseSignInForm} cursor="pointer">
           Sign in
         </Span>
@@ -73,27 +78,9 @@ const LoginForm:React.FC<{setCurrentUser:(value:string|null)=>void}> = ({ setCur
         </Span>
       </Div>
 
-      <Div //1-2
-        width="366px"
-        height="250px"
-        // border="1px black solid"
-      >
-        <Div //1-2-1
-          display="flex"
-          width="366px"
-          margin="0"
-          // height="300px"
-          overflow="hidden"
-          // border="1px black solid"
-        >
-          <Div //1-2-1-1
-            display="block"
-            margin="0 auto"
-            padding="5px"
-            width="355px"
-            height="120px"
-            style={signInStyle}
-          >
+      <Div width="366px" height="250px">
+        <Div display="flex" width="366px" margin="0" overflow="hidden">
+          <Div display="block" margin="0 auto" padding="5px" width="355px" height="120px" style={signInStyle}>
             <form onSubmit={handleLogin}>
               <Input
                 type="text"
@@ -106,21 +93,13 @@ const LoginForm:React.FC<{setCurrentUser:(value:string|null)=>void}> = ({ setCur
                 onChange={handleUsernameChange}
               />
 
-              <StyledButton
-                type="submit"
-                display="block"
-                margin="8px auto"
-                width="300px"
-                height="28px"
-              >
+              <StyledButton type="submit" display="block" margin="8px auto" width="300px" height="28px">
                 Sign in
               </StyledButton>
             </form>
           </Div>
 
-          <Div //1-2-1-2
-            padding="5px"
-          >
+          <Div padding="5px">
             <form onSubmit={handleSignUp}>
               <Input
                 type="text"
@@ -132,13 +111,7 @@ const LoginForm:React.FC<{setCurrentUser:(value:string|null)=>void}> = ({ setCur
                 onChange={handleUsernameChange}
               />
 
-              <StyledButton
-                type="submit"
-                display="block"
-                margin="8px auto"
-                width="85%"
-                height="28px"
-              >
+              <StyledButton type="submit" display="block" margin="8px auto" width="85%" height="28px">
                 Sign up
               </StyledButton>
             </form>

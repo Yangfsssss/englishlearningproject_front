@@ -32,6 +32,7 @@ export const Span = styled.span`
   word-wrap: break-word;
   word-break: break-all;
   cursor: ${(props) => props.cursor};
+  vertical-align: middle
 `;
 
 // export const Div = styled.div`

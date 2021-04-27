@@ -29,11 +29,16 @@ const Menu: React.FC<{ switchReviewItem: (value: string) => void }> = ({
   );
 };
 
+interface SelectionStatus {
+  English:boolean
+  QA:boolean
+}
+
 const StudyReview: React.FC<{ sections: Section[]; QAUnits: QAUnit[] }> = ({
   sections,
   QAUnits
 }) => {
-  const [visibility, setVisibility] = useState({ English: true, QA: false });
+  const [visibility, setVisibility] = useState<SelectionStatus>({ English: true, QA: false });
 
   const switchReviewItem = (itemName: string): void => {
     switch (itemName) {

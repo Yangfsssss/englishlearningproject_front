@@ -9,24 +9,30 @@ interface QAUnitAction {
 
 export const initializeQAUnits = () => {
   return async (dispatch: (value: QAUnitAction) => void) => {
-    const { data: res } = await network.getQAUnits();
-    dispatch({
-      type: "INIT_QAUNITS",
-      data: res
-    });
+    try {
+      const { data: res } = await network.getQAUnits();
+      dispatch({
+        type: "INIT_QAUNITS",
+        data: res,
+      });
+    } catch (e) {
+      console.error(e);
+    }
   };
 };
 
 export const createNewQAUnit = (newQAUnit: QAUnit) => {
   return async (dispatch: (value: QAUnitAction) => void) => {
-    const { data: resData, status: resStatus } = await network.saveQAUnit(
-      newQAUnit
-    );
-    dispatch({
-      type: "New_QAUNIT",
-      data: resData
-    });
-    return resStatus;
+    try {
+      const { data: resData, status: resStatus } = await network.saveQAUnit(newQAUnit);
+      dispatch({
+        type: "New_QAUNIT",
+        data: resData,
+      });
+      return resStatus;
+    } catch (e) {
+      console.error(e);
+    }
   };
 };
 
@@ -65,10 +71,7 @@ export const createNewQAUnit = (newQAUnit: QAUnit) => {
 //   ]
 // };
 
-const QAUnitReducer = (
-  state: QAUnit[] = [],
-  action: QAUnitAction
-): QAUnit[] => {
+const QAUnitReducer = (state: QAUnit[] = [], action: QAUnitAction): QAUnit[] => {
   switch (action.type) {
     case "INIT_QAUNITS":
       return action.data as QAUnit[];
